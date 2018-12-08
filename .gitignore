@@ -3,3 +3,5 @@ env/
 *.swo
 *.swp
 *.swn
+frontend/nodemodules
+frontend/package-lock.json
