@@ -1,2 +1,5 @@
 secret_keys.txt
 env/
+*.swo
+*.swp
+*.swn
