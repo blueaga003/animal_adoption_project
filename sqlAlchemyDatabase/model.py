@@ -27,14 +27,21 @@ class Location(db.Model):
 
     __tablename__ = "locations"
 
-    #TODO:
-    # API_Data Fields
-    
+        location_id = db.Column(db.Integer, primary_key=True, autoincrement=True,)
+        location_name = db.Column(db.String(100), nullable=False,)
+        address_1 = db.Column(dbString(50), nullable=False,)
+        address_2 = db.Column(db.String(50), nullable=True,)
+        address_3 = db.Column(db.String(50), nullable=True,)
+        state = db.Column(db.String(2), nullable=False,)
+        latitude = db.Column(db.Float, nullable=False,)
+        longitude = db.Column(db.Float, nullable=False,)
+        # TODO POSSIBLY ADD MORE DATA i.e. HOURS
+        #TODO: Fill in REPR function
+
     def __repr__(self):
         """Show into about location."""
-        pass
-        #TODO: Fill in REPR function
-        return
+
+    return "< location_id={}, location_name={}, address_1={}, address_2={}, address_3={}, state={}, latitude={}, longitude={} >".format(self.location_id, self.location_name, self.address_1, self.address_2, self.address_3, self.state, self.latitude, self.longitude)
 
 class Rating(db.Model):
     """Location rating model."""
@@ -53,14 +60,19 @@ class Rating(db.Model):
 
 class PetPreferances(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"),)
-    #TODO: 
-    # API_DATA FIELDS
+    animal_species = db.Column(db.String(25), nullable=True,)
+   # animal_breed = db.Column(db.String(50), nullable=True,)
+   # animal_activity_level = dbColumn(db.String(25), nullable=True,)
+   # animal_age = db.column(db.String(45), nullable=True,)
+   # animal_exercise_needs = db.Column(db.String(45), nullable=True,)
+   # animal_grooming_needs = db.Column(db.String(45), nullable=True,)
+   #TODO: Possible add more after viewing seed data 
+    
 
     def __repr__(self):
         """ Show info about user pet preferances."""
         # TODO: Fill in REPR function
-        pass
-        return
+        return "< user_id={}, animal_species={}".format(self.user_id, self.animal_species)
 
 class Comment(db.model):
     """Comment model."""
