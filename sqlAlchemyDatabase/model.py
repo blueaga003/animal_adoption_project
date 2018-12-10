@@ -1,15 +1,16 @@
-import sys
 from flask_sqlalchemy import SQLAlchemy
+import sys
 sys.path.append("..")
 from server import app
 
 db = SQLAlchemy()
 
 def connect_to_db(app):
-    """Connect to database."""
+    """Connect to database from Flask app."""
 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///pet_project'
     app.config['SQLALCHEMY_ECHO'] = True
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app
     db.init_app(app)
 
@@ -102,4 +103,6 @@ class Comment(db.Model):
         return "< comment_id={}, user_id={}, location_id={}, comment_body={}, visibile_to_users={} >".format(self.comment_body, self.user_id, self.location_id, self.comment_body, self.visible_to_users)
 
 connect_to_db(app)
-db.create_all()
+print("Connected to database.")
+if db.create_all():
+    print("Database successfully created.")
