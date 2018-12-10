@@ -1,8 +1,17 @@
-"""Models and database functions for pets database."""
-
+import sys
 from flask_sqlalchemy import SQLAlchemy
+sys.path.append("..")
+from server import app
 
 db = SQLAlchemy()
+
+def connect_to_db(app):
+    """Connect to database."""
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///pet_project'
+    app.config['SQLALCHEMY_ECHO'] = True
+    db.app = app
+    db.init_app(app)
 
 class User(db.Model):
     """User model."""
@@ -16,6 +25,7 @@ class User(db.Model):
     first_name = db.Column(db.String(25), nullable=False,)
     last_name = db.Column(db.String(25), nullable=False,)
     default_location = db.Column(db.String(30), nullable=False,)
+    pet_preferances = db.relationship("PetPreferances")
 
     def __repr__(self):
         """Show info about user."""
@@ -27,24 +37,26 @@ class Location(db.Model):
 
     __tablename__ = "locations"
 
-        location_id = db.Column(db.Integer, primary_key=True, autoincrement=True,)
-        location_name = db.Column(db.String(100), nullable=False,)
-        address_1 = db.Column(dbString(50), nullable=False,)
-        address_2 = db.Column(db.String(50), nullable=True,)
-        address_3 = db.Column(db.String(50), nullable=True,)
-        state = db.Column(db.String(2), nullable=False,)
-        latitude = db.Column(db.Float, nullable=False,)
-        longitude = db.Column(db.Float, nullable=False,)
-        # TODO POSSIBLY ADD MORE DATA i.e. HOURS
-        #TODO: Fill in REPR function
+    location_id = db.Column(db.Integer, primary_key=True, autoincrement=True,)
+    location_name = db.Column(db.String(100), nullable=False,)
+    address_1 = db.Column(db.String(50), nullable=False,)
+    address_2 = db.Column(db.String(50), nullable=True,)
+    address_3 = db.Column(db.String(50), nullable=True,)
+    city = db.Column(db.String(30), nullable=False,)
+    state = db.Column(db.String(2), nullable=False,)
+    latitude = db.Column(db.Float, nullable=False,)
+    longitude = db.Column(db.Float, nullable=False,)
+    # TODO POSSIBLY ADD MORE DATA i.e. HOURS
+    #TODO: Fill in REPR function
 
     def __repr__(self):
         """Show into about location."""
 
-    return "< location_id={}, location_name={}, address_1={}, address_2={}, address_3={}, state={}, latitude={}, longitude={} >".format(self.location_id, self.location_name, self.address_1, self.address_2, self.address_3, self.state, self.latitude, self.longitude)
+        return "< location_id={}, location_name={}, address_1={}, address_2={}, address_3={}, city={}, state={}, latitude={}, longitude={} >".format(self.location_id, self.location_name, self.address_1, self.address_2, self.address_3, self.city, self.state, self.latitude, self.longitude)
+
 
 class Rating(db.Model):
-    """Location rating model."""
+    """Rating model."""
 
     __tablename__ = "ratings"
 
@@ -59,30 +71,35 @@ class Rating(db.Model):
         return "< rating_id={}, user_id={}, location_id={}, rating_value={}".format(self.rating_id, self.user_id. self.location_id, self.rating_value)
 
 class PetPreferances(db.Model):
-    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"),)
+    """Pet preferances model."""
+    preferance_key = db.Column(db.Integer, primary_key=True, autoincrement=True,)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"),) #Use relationship to autofill value, don't need backref but useful to learn about
     animal_species = db.Column(db.String(25), nullable=True,)
    # animal_breed = db.Column(db.String(50), nullable=True,)
    # animal_activity_level = dbColumn(db.String(25), nullable=True,)
    # animal_age = db.column(db.String(45), nullable=True,)
    # animal_exercise_needs = db.Column(db.String(45), nullable=True,)
    # animal_grooming_needs = db.Column(db.String(45), nullable=True,)
-   #TODO: Possible add more after viewing seed data 
-    
+   #TODO: Possible add more after viewing seed data
+
 
     def __repr__(self):
         """ Show info about user pet preferances."""
         # TODO: Fill in REPR function
         return "< user_id={}, animal_species={}".format(self.user_id, self.animal_species)
 
-class Comment(db.model):
+class Comment(db.Model):
     """Comment model."""
 
     comment_id = db.Column(db.Integer, primary_key=True, autoincrement=True,)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"),)
     location_id = db.Column(db.Integer, db.ForeignKey("locations.location_id"),)
     comment_body = db.Column(db.String(300), nullable=False,)
-    visible_to_users = db.Column(db.Bit, default=1, nullable=False,)
+    visible_to_users = db.Column(db.Boolean, default=1, nullable=False,)
     def __repr__(self):
         """ Show info about comment."""
 
         return "< comment_id={}, user_id={}, location_id={}, comment_body={}, visibile_to_users={} >".format(self.comment_body, self.user_id, self.location_id, self.comment_body, self.visible_to_users)
+
+connect_to_db(app)
+db.create_all()
