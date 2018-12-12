@@ -20,13 +20,16 @@ class User(db.Model):
     __tablename__ = "users"
 
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True,)
-    email = db.Column(db.String(100), nullable=False,)
-    username = db.Column(db.String(30), nullable=False,)
+    email = db.Column(db.String(100), nullable=False, unique=True,)
+    username = db.Column(db.String(30), nullable=False, unique=True,)
     password = db.Column(db.String(30), nullable=False,)
     first_name = db.Column(db.String(25), nullable=False,)
     last_name = db.Column(db.String(25), nullable=False,)
     default_location = db.Column(db.String(30), nullable=False,)
-    pet_preferances = db.relationship("PetPreferances")
+    pet_preferences = db.relationship("PetPreferences")
+    rating = db.relationship("Rating")
+    comment = db.relationship("Comment")
+
 
     def __repr__(self):
         """Show info about user."""
@@ -47,6 +50,8 @@ class Location(db.Model):
     state = db.Column(db.String(2), nullable=False,)
     latitude = db.Column(db.Float, nullable=False,)
     longitude = db.Column(db.Float, nullable=False,)
+    rating = db.relationship("Rating")
+    comment = db.relationship("Comment")
     # TODO POSSIBLY ADD MORE DATA i.e. HOURS
     #TODO: Fill in REPR function
 
@@ -54,7 +59,6 @@ class Location(db.Model):
         """Show into about location."""
 
         return "< location_id={}, location_name={}, address_1={}, address_2={}, address_3={}, city={}, state={}, latitude={}, longitude={} >".format(self.location_id, self.location_name, self.address_1, self.address_2, self.address_3, self.city, self.state, self.latitude, self.longitude)
-
 
 class Rating(db.Model):
     """Rating model."""
@@ -71,32 +75,36 @@ class Rating(db.Model):
 
         return "< rating_id={}, user_id={}, location_id={}, rating_value={}".format(self.rating_id, self.user_id. self.location_id, self.rating_value)
 
-class PetPreferances(db.Model):
-    """Pet preferances model."""
+class PetPreferences(db.Model):
+    """Pet preferences model."""
+
+    __tablename__ = "pet_preferences"
     preferance_key = db.Column(db.Integer, primary_key=True, autoincrement=True,)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"),) #Use relationship to autofill value, don't need backref but useful to learn about
     animal_species = db.Column(db.String(25), nullable=True,)
-   # animal_breed = db.Column(db.String(50), nullable=True,)
-   # animal_activity_level = dbColumn(db.String(25), nullable=True,)
-   # animal_age = db.column(db.String(45), nullable=True,)
-   # animal_exercise_needs = db.Column(db.String(45), nullable=True,)
-   # animal_grooming_needs = db.Column(db.String(45), nullable=True,)
+    animal_breed = db.Column(db.String(50), nullable=True,)
+    animal_activity_level = db.Column(db.String(25), nullable=True,)
+    animal_age = db.Column(db.String(45), nullable=True,)
+    animal_exercise_needs = db.Column(db.String(45), nullable=True,)
+    animal_grooming_needs = db.Column(db.String(45), nullable=True,)
    #TODO: Possible add more after viewing seed data
-
 
     def __repr__(self):
         """ Show info about user pet preferances."""
-        # TODO: Fill in REPR function
-        return "< user_id={}, animal_species={}".format(self.user_id, self.animal_species)
+
+        return "< user_id={}, animal_species={}, animal_breed={}, animal_activity_level={}, animal_age={}, animal_exercise_needs={}, animal_grooming_needs={}".format(self.user_id, self.animal_species, self.animal_breed, self.animal_activity_level, self.animal_age, self.animal_exercise_needs, self.animal_grooming_needs)
 
 class Comment(db.Model):
     """Comment model."""
+
+    __tablename__ = "comments"
 
     comment_id = db.Column(db.Integer, primary_key=True, autoincrement=True,)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"),)
     location_id = db.Column(db.Integer, db.ForeignKey("locations.location_id"),)
     comment_body = db.Column(db.String(300), nullable=False,)
     visible_to_users = db.Column(db.Boolean, default=1, nullable=False,)
+
     def __repr__(self):
         """ Show info about comment."""
 
