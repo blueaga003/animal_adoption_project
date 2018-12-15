@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Greeting from './components/greeting/greeting.js';
-import Map from './components/map/map.js';
+import Greeting from './components/greeting/greeting';
+import Map from './components/map/map';
+import FormContainer from './containers/searchFormContainer';
 // import other components we want to render here such as a NAVBAR for example
 
 class App extends Component {
@@ -25,6 +26,7 @@ class App extends Component {
         </header>
               <div style={{height: '1000px', width: '1000px'}}>
                 <Greeting/>
+                <FormContainer/>
                 <Map/>
              </div>
      </div>
