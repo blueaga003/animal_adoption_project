@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import './App.css';
+import NavBar from './components/nav_bar/navBar';
 import Greeting from './components/greeting/greeting';
 import Map from './components/map/map';
 import FormContainer from './containers/searchFormContainer';
@@ -11,8 +12,9 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
+          <NavBar/>
         </header>
-              <div style={{height: '1500px', width: '1500px'}}>
+              <div style={{height: '1200px', width: '1200px'}}>
                 <Greeting/>
                 <Container>
                   <Row>
