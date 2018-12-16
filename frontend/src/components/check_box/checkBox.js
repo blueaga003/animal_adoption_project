@@ -1,4 +1,4 @@
-/* CheckBox.jsx */
+/* checkBox.jsx */
 import React from 'react'
 const CheckBox = (props) => {
 
