@@ -11,17 +11,20 @@ class SearchFormContainer extends Component {
     this.state = {
       newUser: {
         species: '',
+        animalActivityLevels: [],
         gender: [],
 
       },
 
     genderOptions: ['Male', 'Female'],
     speciesOptions: ['Dog', 'Cat', 'Horse'],
-    activityLevel: ['Active', 'Not Active']
+    activityLevels: ['Not Active', 'Slightly Active', 'Moderately Active', 'Highly Active'],
+    //dogBreedOptions: []
   }
 
 
   this.handleGenderCheckBox = this.handleGenderCheckBox.bind(this);
+  this.handleActivityLevelsCheckBox = this.handleActivityLevelsCheckBox.bind(this);
   this.handleInput = this.handleInput.bind(this);
   this.handleFormSubmit = this.handleFormSubmit.bind(this);
 
@@ -39,6 +42,23 @@ handleGenderCheckBox(e) {
 
       this.setState( prevState => ({ newUser:
         {...prevState.newUser, gender: newSelectionArray }
+      })
+      )
+}
+
+handleActivityLevelsCheckBox(e) {
+
+    const newSelection = e.target.value;
+    let newSelectionArray;
+
+    if(this.state.newUser.animalActivityLevels.indexOf(newSelection) > -1) {
+      newSelectionArray = this.state.newUser.animalActivityLevels.filter(s => s !== newSelection)
+    } else {
+      newSelectionArray = [...this.state.newUser.animalActivityLevels, newSelection];
+    }
+
+      this.setState( prevState => ({ newUser:
+        {...prevState.newUser, animalActivityLevels: newSelectionArray }
       })
       )
 }
@@ -71,7 +91,7 @@ handleInput(e) {
 
   render() {
     return (
-      <form className='searchWants' onSubmit={this.handleFormSubmit}>
+      <form className='aniamlSearchWants' onSubmit={this.handleFormSubmit}>
         <h2> Search Preferances </h2>
         <CheckBox title={'Gender'}
                   name={'gender'}
@@ -79,6 +99,14 @@ handleInput(e) {
                   selectedOptions={this.state.newUser.gender}
                   value={this.state.value}
                   handleChange={this.handleGenderCheckBox}
+                  />
+
+        <CheckBox title={'AnimalActivityLevels'}
+                  name={'animalActivityLevels'}
+                  options={this.state.activityLevels}
+                  selectedOptions={this.state.newUser.animalActivityLevels}
+                  value={this.state.value}
+                  handleChange={this.handleActivityLevelsCheckBox}
                   />
 
        <DropDown title={'Species'}
