@@ -1,5 +1,6 @@
 secret_keys.txt
 env/
+location_data.json
 *.swo
 *.swp
 *.swn
