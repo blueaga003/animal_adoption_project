@@ -5,6 +5,7 @@ import NavBar from './components/nav_bar/navBar';
 import Greeting from './components/greeting/greeting';
 import Map from './components/map/map';
 import FormContainer from './containers/searchFormContainer';
+import LogInContainer from './containers/logInContainer';
 // import other components we want to render here such as a NAVBAR for example
 
 class App extends Component {
@@ -27,6 +28,7 @@ class App extends Component {
                   </Row>
                 </Container>
              </div>
+          <LogInContainer/>
      </div>
     );
   }
