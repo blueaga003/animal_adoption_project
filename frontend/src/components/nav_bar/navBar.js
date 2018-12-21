@@ -24,7 +24,10 @@ render() {
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">Login</NavLink>
+              <NavLink href="/signup">Signup</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/login">Login</NavLink>
             </NavItem>
           </Nav>
         </Collapse>
