@@ -1,5 +1,6 @@
-secret_keys.txt
-env/
+secret_keys*
+*env/
+.env
 location_data.json
 pet_data.json
 *.swl
