@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-import sys, json
+import sys, json, re
 sys.path.append("..")
 from server import app
 
@@ -62,6 +62,7 @@ class Location(db.Model):
 
     def update_locations():
         """Adds new location data to database."""
+
         json_data = open("location_data.json")
         all_new_locations = json.load(json_data)
         new_locations = []
@@ -94,18 +95,17 @@ class PetPreferences(db.Model):
     __tablename__ = "pet_preferences"
     preferance_key = db.Column(db.Integer, primary_key=True, autoincrement=True,)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"),) #Use relationship to autofill value, don't need backref but useful to learn about
-    animal_species = db.Column(db.String(25), nullable=True,)
+    animal_species = db.Column(db.String(50), nullable=True,)
     animal_breed = db.Column(db.String(50), nullable=True,)
-    animal_activity_level = db.Column(db.String(25), nullable=True,)
+    animal_activity_level = db.Column(db.String(50), nullable=True,)
     animal_age = db.Column(db.String(45), nullable=True,)
-    animal_exercise_needs = db.Column(db.String(45), nullable=True,)
     animal_grooming_needs = db.Column(db.String(45), nullable=True,)
    #TODO: Possible add more after viewing seed data
 
     def __repr__(self):
         """ Show info about user pet preferances."""
 
-        return "< user_id={}, animal_species={}, animal_breed={}, animal_activity_level={}, animal_age={}, animal_exercise_needs={}, animal_grooming_needs={}".format(self.user_id, self.animal_species, self.animal_breed, self.animal_activity_level, self.animal_age, self.animal_exercise_needs, self.animal_grooming_needs)
+        return "< user_id={}, animal_species={}, animal_breed={}, animal_activity_level={}, animal_age={}, animal_grooming_needs={}".format(self.user_id, self.animal_species, self.animal_breed, self.animal_activity_level, self.animal_age, self.animal_grooming_needs)
 
 class Comment(db.Model):
     """Comment model."""
@@ -123,6 +123,57 @@ class Comment(db.Model):
 
         return "< comment_id={}, user_id={}, location_id={}, comment_body={}, visibile_to_users={} >".format(self.comment_body, self.user_id, self.location_id, self.comment_body, self.visible_to_users)
 
+class Pet(db.Model):
+    """Pets model."""
+
+    __tablename__ = "pets"
+    animal_id = db.Column(db.Integer, primary_key=True, unique=True,)
+    animal_name = db.Column(db.String(50), nullable=False,)
+    animal_species = db.Column(db.String(50), nullable=False,)
+    animal_breed = db.Column(db.String(50), nullable=False,)
+    animal_activity_level = db.Column(db.String(50), default="Unknown",)
+    animal_age = db.Column(db.String(45), nullable=False, default="Unknown",)
+    animal_grooming_needs = db.Column(db.String(45), nullable=False, default="Unknown")
+    animal_adoption_status = db.Column(db.String(1), nullable=False, default="Y")
+    animal_url = db.Column(db.String(200),nullable=True,)
+
+    def __repr__(self):
+        """ Show info about pets."""
+
+        return "< animal_id={}, animal_name={}, animal_species={}, animal_breed={}, animal_activity_level={}, animal_age={}, animal_grooming_needs={}".format(self.animal_id, self.animal_name, self.animal_species, self.animal_breed, self.animal_activity_level, self.animal_age, self.animal_grooming_needs, self.animal_adoption_status, self.animal_url)
+
+    def update_pets():
+        """Adds new pet data to database."""
+
+        json_data = open("pet_data.json")
+        all_new_pets = json.load(json_data)
+        new_pets = []
+        i = 0
+        for pet in all_new_pets["pets"]:
+            new_entry = Pet(animal_id = pet["animalID"], animal_name = pet["name"], animal_species = pet["species"], animal_breed = pet["primaryBreed"], animal_activity_level =  pet["activityLevel"], animal_age = pet["age"], animal_grooming_needs = pet["groomingNeeds"], animal_url = "NA")
+            # Cleaning data
+            # Does not include pet if the species is not listed
+            if new_entry.animal_species == "":
+                continue
+            if new_entry.animal_breed == "":
+                new_entry.animal_breed = "Unknown"
+            # Does not include pet if the name has more than two spaces or certain symbols (data cleaning)
+            if (new_entry.animal_name.count(" ")) > 1:
+                continue
+            #if re.search("*-(", new_entry.animal_name):
+            #       continue
+            if new_entry.animal_activity_level =="":
+                new_entry.animal_activity_level = "Unknown"
+            if new_entry.animal_age =="":
+                new_entry.animal_age = "Unknown"
+            if new_entry.animal_grooming_needs =="":
+                new_entry.animal_grooming_needs = "Unknown"
+
+            new_pets.append(new_entry)
+            
+        db.session.add_all(new_pets)
+        db.session.commit()
+        json_data.close()
 
 connect_to_db(app)
 print("Connected to database.")
