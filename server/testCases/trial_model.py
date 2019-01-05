@@ -51,6 +51,26 @@ class PetPreferences(db.Model):
         # TODO: Fill in REPR function
         return "< user_id={}, animal_species={}".format(self.user_id, self.animal_species)
 
+class Pets(db.Model):
+    """Pets."""
+
+    __tablename__ = "pets"
+    animal_key = db.Column(db.Integer, autoincrement=True,)
+    animal_id = db.Column(db.Integer, primary_key=True, unique=True,)
+    animal_name = db.Column(db.String(25), nullable=False,)
+    animal_species = db.Column(db.String(25), nullable=False,)
+    animal_breed = db.Column(db.String(50), nullable=False, default="Unknown",)
+    animal_activity_level = db.Column(db.String(25), default="Unknown",)
+    animal_age = db.Column(db.String(45), nullable=True, default="Unkown",)
+    animal_grooming_needs = db.Column(db.String(45), nullable=True, default="Unknown",)
+    animal_adoption_status = db.Column(db.String(1), nullable=True,)
+    animal_url = db.String(100)
+
+    def __repr__(self):
+        """ Show info about user pet preferences."""
+        # TODO: Fill in REPR function
+        return "< user_id={}, animal_species={}".format(self.user_id, self.animal_species)
+
 connect_to_db(app)
 print("Connected to database.")
 db.create_all()
