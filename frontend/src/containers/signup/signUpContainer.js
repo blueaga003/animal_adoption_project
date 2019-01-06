@@ -33,9 +33,9 @@ class SignUpContainer extends Component {
 
   handleSubmit(event){
     event.preventDefault();
-    fetch('http://localhost:5000/signup', {credentials:'include', mode:'no-cors'})
+    fetch('http://localhost:5000/signup', {credentials:'include', method:'POST', body:'data'})
     // Keep console.log for testing
-    console.log("call")
+    console.log(this.props)
   };
 
   render() {
