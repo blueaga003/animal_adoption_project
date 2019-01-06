@@ -89,7 +89,7 @@ class Rating(db.Model):
 
         return "< rating_id={}, user_id={}, location_id={}, rating_value={}".format(self.rating_id, self.user_id. self.location_id, self.rating_value)
 
-class PetPreferences(db.Model):
+class PetPreference(db.Model):
     """Pet preferences model."""
 
     __tablename__ = "pet_preferences"
