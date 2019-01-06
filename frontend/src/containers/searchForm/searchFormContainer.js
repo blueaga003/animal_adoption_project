@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-
-// Import Components
-import { CheckBox } from '../components/check_box/checkBox';
-import { DropDown } from '../components/drop_down/dropDown';
+import { CheckBox } from '../../components/check_box/checkBox';
+import { DropDown } from '../../components/drop_down/dropDown';
 
 class SearchFormContainer extends Component {
   constructor(props) {
@@ -16,9 +14,9 @@ class SearchFormContainer extends Component {
 
       },
 
-    genderOptions: ['Male', 'Female'],
-    speciesOptions: ['Dog', 'Cat', 'Horse'],
-    activityLevels: ['Not Active', 'Slightly Active', 'Moderately Active', 'Highly Active'],
+    genderOptions: ['male', 'female'],
+    speciesOptions: ['dog', 'cat', 'horse'],
+    activityLevels: ['not active', 'slightly active', 'moderately active', 'highly active'],
     //dogBreedOptions: []
   }
 
@@ -93,15 +91,14 @@ handleInput(e) {
     return (
       <form className='aniamlSearchWants' onSubmit={this.handleFormSubmit}>
         <h2> Search Preferances </h2>
-        <CheckBox title={'Gender'}
+        <CheckBox title={'GENDER'}
                   name={'gender'}
                   options={this.state.genderOptions}
                   selectedOptions={this.state.newUser.gender}
                   value={this.state.value}
                   handleChange={this.handleGenderCheckBox}
                   />
-
-        <CheckBox title={'AnimalActivityLevels'}
+        <CheckBox title={'ACTIVITY LEVEL'}
                   name={'animalActivityLevels'}
                   options={this.state.activityLevels}
                   selectedOptions={this.state.newUser.animalActivityLevels}
@@ -109,7 +106,7 @@ handleInput(e) {
                   handleChange={this.handleActivityLevelsCheckBox}
                   />
 
-       <DropDown title={'Species'}
+       <DropDown title={'SPECIES'}
                name={'species'}
                options = {this.state.speciesOptions} 
                value = {this.state.newUser.species}
