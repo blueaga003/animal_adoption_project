@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { Collapse, Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 
 class NavBar extends Component {
 constructor(props) {
@@ -19,7 +19,6 @@ render() {
   return (
     <div>
       <Navbar color="faded" light toggleable>
-        <NavbarToggler right onClick={this.toggle} />
         <NavbarBrand href="/">HoundDog</NavbarBrand>
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
