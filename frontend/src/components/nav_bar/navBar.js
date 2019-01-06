@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Collapse, Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
-
+import './navBar.css'
 class NavBar extends Component {
 constructor(props) {
   super(props);
@@ -18,7 +18,7 @@ toggle() {
 render() {
   return (
     <div>
-      <Navbar color="faded" light toggleable>
+      <Navbar color="faded" light expand="md">
         <NavbarBrand href="/">HoundDog</NavbarBrand>
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
