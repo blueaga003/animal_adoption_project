@@ -18,7 +18,7 @@ class SignUpContainer extends Component {
 
     this.validateForm = this.validateForm.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.handleAll = this.handleAll.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   validateForm() {
@@ -31,9 +31,10 @@ class SignUpContainer extends Component {
     });
   }
 
-  handleAll(event){
-    //event.preventDefault();
-    fetch('http://localhost:5000/signup')
+  handleSubmit(event){
+    event.preventDefault();
+    fetch('http://localhost:5000/signup', {credentials:'include', mode:'no-cors'})
+    // Keep console.log for testing
     console.log("call")
   };
 
@@ -47,7 +48,7 @@ class SignUpContainer extends Component {
         gender={this.state.gender}
         validateForm={this.validateForm}
         handleChange={this.handleChange}
-        handleAll={this.handleAll}
+        handleSubmit={this.handleSubmit}
       />
     );
   }

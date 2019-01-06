@@ -9,8 +9,6 @@ class SignUp extends Component {
   };
 
   render() { 
-   console.log(this.props)
-   this.props.handleAll()
     return (
       <div className='SignUp'>
         <form onSubmit={this.props.handleSubmit}>
@@ -33,7 +31,7 @@ class SignUp extends Component {
           </FormGroup>
           <SearchFormContainer/>
           <Button
-            onClick={this.props.handleAll}
+            onClick={this.props.handleSubmit}
             block
             bsSize="large"
             disabled={!this.props.validateForm()}
