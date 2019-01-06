@@ -10,7 +10,7 @@ const CheckBox = (props) => {
           <label key={option}>
             <input
               className="form-checkbox"
-              id ={props.name}
+              id={option}
               name={props.name}
               onChange={props.handleChange}
               value={option}
