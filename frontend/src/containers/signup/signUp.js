@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import SearchFormContainer from '../searchFormContainer';
+import SearchFormContainer from '../searchForm/searchFormContainer';
+import './signUp.css'
 
 class SignUp extends Component {
 

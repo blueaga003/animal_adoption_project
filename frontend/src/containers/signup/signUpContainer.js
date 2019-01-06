@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import SearchFormContainer from '../searchFormContainer';
 import SignUp from './signUp';
 
 // Import Components
@@ -34,11 +33,16 @@ class SignUpContainer extends Component {
   handleSubmit(event){
     event.preventDefault();
     fetch('http://localhost:5000/signup', {
-    credentials:'include',
-    method:'POST',
-    body:'data'
-    }
-    )
+      credentials:'include',
+      method:'POST',
+      body:'data'
+    })
+    .then(response => response.json())
+    .then(() => {
+      this.props.history.goBack();
+    })
+    .catch((error) => {this.setState({isLoading: true, error})});
+    
     // Keep console.log for testing
     console.log(this.props)
   };
