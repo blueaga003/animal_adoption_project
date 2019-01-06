@@ -18,6 +18,12 @@ def signup():
     print("success")
     return "hi"
     
+@app.route('/login', methods = ['POST'])
+def login():
+    """User login."""
+#put in session as logged in
+    print("success login")
+    return "hi"
 #Set session/cookie
 
 

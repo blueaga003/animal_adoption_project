@@ -28,6 +28,7 @@ export default class LoginContainer extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    fetch('http://localhost:5000/login', {credentials:'include', method:'POST', body:'data'})
   }
 
   render() {
@@ -37,7 +38,7 @@ export default class LoginContainer extends Component {
       password={this.state.password}
       handleChange={this.handleChange}
       validateForm={this.validateForm}
-    //  handleSubmit={this.handleSubmit}
+      handleSubmit={this.handleSubmit}
     />
     );
   }
