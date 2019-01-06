@@ -4,7 +4,8 @@ class Greeting extends Component {
   render() {
     return (
       <div className = "Greeting">
-        <h1> HoundDog!</h1>
+        <br/>
+        <br/>
       </div> 
     );
   }

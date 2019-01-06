@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import Greeting from '../components/greeting/greeting'
 import Map from '../components/map/map';
-import FormContainer from './searchFormContainer'
+import FormContainer from './searchForm/searchFormContainer'
 
 class HomePage extends Component {
   render() {
