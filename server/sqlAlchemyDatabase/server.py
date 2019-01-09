@@ -11,16 +11,21 @@ CORS(app, supports_credentials=True)
 
 app.secret_key = 'AB'
 
-@app.route('/signup', methods = ['POST'])
+@app.route('/signup', methods = ['GET', 'POST'])
 def signup():
     """User login."""
+   # print(request.headers['x-access-token'])
+    data = request.json
+    print(data)
 #put in session as logged in
-    print("success")
+    print("success signup")
     return "hi"
     
 @app.route('/login', methods = ['POST'])
 def login():
     """User login."""
+    print(request)
+    print(request.json)
 #put in session as logged in
     print("success login")
     return "hi"
