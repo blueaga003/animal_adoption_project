@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 from flask import Flask, redirect, session, request, render_template
 from flask_debugtoolbar import DebugToolbarExtension
-#from model import User, Location, Rating, PetPreference, Comment, Pet
-import model, json
+from model import User, connect_to_db, Location, Rating, PetPreference, Comment, Pet
+#import model, json
 from flask_cors import CORS
 #TODO: Import secret key and change to variable
 
@@ -28,6 +28,8 @@ def login():
     if request.method == 'POST':
         data = request.get_json()
         print(data['email'])
+
+        #model.User.query.filterby(model.User
 #put in session as logged in
         print("success login")
         return "hi"
