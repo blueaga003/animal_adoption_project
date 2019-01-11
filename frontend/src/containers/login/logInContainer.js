@@ -28,7 +28,15 @@ export default class LoginContainer extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    fetch('http://localhost:5000/login', {credentials:'include', method:'POST', body:'data'})
+    fetch('http://localhost:5000/login', {
+      credentials:'include',
+      method:'POST', 
+      body:JSON.stringify(this.state),
+      headers: {
+        'Accept':'application/json', 
+        'Content-Type':'application/json'
+      }
+    }).then(response => response.json())
   }
 
   render() {
