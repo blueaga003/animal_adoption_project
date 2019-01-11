@@ -1,18 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 import sys, json, re
-sys.path.append("..")
-from server import app
 
 db = SQLAlchemy()
-
-def connect_to_db(app):
-    """Connect to database from Flask app."""
-
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///pet_project'
-    app.config['SQLALCHEMY_ECHO'] = True
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    db.app = app
-    db.init_app(app)
 
 class User(db.Model):
     """User model."""
@@ -175,7 +164,21 @@ class Pet(db.Model):
         db.session.commit()
         json_data.close()
 
-connect_to_db(app)
-print("Connected to database.")
-if db.create_all():
-    print("Database successfully created.")
+# Helper functions
+
+def connect_to_db(app):
+    """Connect to database from Flask app."""
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///pet_project'
+    app.config['SQLALCHEMY_ECHO'] = True
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.app = app
+    db.init_app(app)
+
+if __name__ == '__main__':
+
+    from server import app
+    connect_to_db(app)
+    print("Connected to database.")
+    if db.create_all():
+        print("Database successfully created.")
