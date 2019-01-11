@@ -2,7 +2,7 @@
 from flask import Flask, redirect, session, request, render_template
 from flask_debugtoolbar import DebugToolbarExtension
 #from model import User, Location, Rating, PetPreference, Comment, Pet
-import model
+import model, json
 from flask_cors import CORS
 #TODO: Import secret key and change to variable
 
@@ -15,20 +15,24 @@ app.secret_key = 'AB'
 def signup():
     """User login."""
    # print(request.headers['x-access-token'])
-    data = request.json
+    data = request.json()
     print(data)
+    print(data['email'])
 #put in session as logged in
     print("success signup")
     return "hi"
     
-@app.route('/login', methods = ['POST'])
+@app.route('/login', methods = ['GET', 'POST'])
 def login():
     """User login."""
-    print(request)
-    print(request.json)
+    if request.method == 'POST':
+        data = request.get_json()
+        print(data['email'])
 #put in session as logged in
-    print("success login")
-    return "hi"
+        print("success login")
+        return "hi"
+    if request.method == 'GET':
+       return "hey"
 #Set session/cookie
 
 
