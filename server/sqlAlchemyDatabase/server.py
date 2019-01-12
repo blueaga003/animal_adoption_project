@@ -1,8 +1,7 @@
 #!/usr/bin/python3
-from flask import Flask, redirect, session, request, render_template
+from flask import Flask, redirect, session, request, render_template, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
-from model import User, connect_to_db, Location, Rating, PetPreference, Comment, Pet
-#import model, json
+from model import User, connect_to_db, db, Location, Rating, PetPreference, Comment, Pet
 from flask_cors import CORS
 #TODO: Import secret key and change to variable
 
@@ -13,11 +12,23 @@ app.secret_key = 'AB'
 
 @app.route('/signup', methods = ['GET', 'POST'])
 def signup():
-    """User login."""
-   # print(request.headers['x-access-token'])
-    data = request.json()
-    print(data)
-    print(data['email'])
+    """User signup."""
+    if request.method == 'POST':
+        data = request.get_json()
+        user_email = data['email']
+        user_exist_query = db.session.query(User).filter_by(email=user_email).all()
+        if user_exist_query == []:
+            new_user = []
+
+            new_user = User(email=data['email'], password=data['password'], first_name=data['first_name'], last_name=data['last_name'], default_location=data['default_location'])
+            new_user_preferences = PetPreference(user_id=User.user_id, species=data['species'], breed=data['breed'], activity_level=data['activity_level'], age=data['age'], sex=data['sex'])
+            db.session.add(new_user)
+            db.session.add(new_user_preferences)
+            db.session.commit
+            return 'Success'
+        else:
+            return 'User already exists'
+                
 #put in session as logged in
     print("success signup")
     return "hi"
@@ -27,7 +38,12 @@ def login():
     """User login."""
     if request.method == 'POST':
         data = request.get_json()
-        print(data['email'])
+        user_email = data['email']
+        user_query = db.session.query(User).filter_by(email=user_email).all()
+        user_exist = {'user':user_query} 
+        if user_query == []:
+            return jsonify(user_exist)
+            
 
         #model.User.query.filterby(model.User
 #put in session as logged in
@@ -41,4 +57,5 @@ def login():
 if __name__ == "__main__":
     app.debug = True
     DebugToolbarExtension(app)
+    connect_to_db(app)
     app.run(host="0.0.0.0")

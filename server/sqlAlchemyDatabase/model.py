@@ -15,7 +15,7 @@ class User(db.Model):
     first_name = db.Column(db.String(25), nullable=False,)
     last_name = db.Column(db.String(25), nullable=False,)
     default_location = db.Column(db.String(30), nullable=False,)
-    pet_preferences = db.relationship("PetPreferences")
+    pet_preferences = db.relationship("PetPreference")
     rating = db.relationship("Rating")
     comment = db.relationship("Comment")
 
@@ -24,6 +24,11 @@ class User(db.Model):
         """Show info about user."""
 
         return "< user_id={}, first_name={}, last_name={}, username={}, password={}, email={}, default_location={} >".format(self.user_id, self.first_name, self.last_name, self.username, self.password, self.email, self.default_location)
+
+    def filter_by(user):
+        """Filter by user."""
+
+        return db.session.query(User).filter_by(first_name=user).all()
 
 class Location(db.Model):
     """Location model."""
@@ -82,13 +87,13 @@ class PetPreference(db.Model):
     """Pet preferences model."""
 
     __tablename__ = "pet_preferences"
-    preferance_key = db.Column(db.Integer, primary_key=True, autoincrement=True,)
+    pet_preferance_key = db.Column(db.Integer, primary_key=True, autoincrement=True,)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"),) #Use relationship to autofill value, don't need backref but useful to learn about
-    animal_species = db.Column(db.String(50), nullable=True,)
-    animal_breed = db.Column(db.String(50), nullable=True,)
-    animal_activity_level = db.Column(db.String(50), nullable=True,)
-    animal_age = db.Column(db.String(45), nullable=True,)
-    animal_grooming_needs = db.Column(db.String(45), nullable=True,)
+    species = db.Column(db.String(50), nullable=True,)
+    breed = db.Column(db.String(50), nullable=True,)
+    activity_level = db.Column(db.String(50), nullable=True,)
+    age = db.Column(db.String(45), nullable=True,)
+    sex = db.Column(db.String(45), nullable=True,)
    #TODO: Possible add more after viewing seed data
 
     def __repr__(self):
