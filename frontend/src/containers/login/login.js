@@ -3,10 +3,10 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./login.css";
 
 export default class Login extends Component {
-  constructor(props) {
-    super(props);
+ // constructor(props) {
+  //  super(props);
 
-  }
+ // }
 
   render() {
     return (
@@ -38,6 +38,9 @@ export default class Login extends Component {
             Login
           </Button>
         </form>
+        <div className="UserActivity">
+          {this.props.handleResponse()}
+        </div>
       </div>
     );
   }

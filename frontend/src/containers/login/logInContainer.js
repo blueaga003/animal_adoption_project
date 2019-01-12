@@ -8,12 +8,14 @@ export default class LoginContainer extends Component {
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      userResponse: 0
     };
 
     this.validateForm = this.validateForm.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleResponse = this.handleResponse.bind(this)
   }
 
   validateForm() {
@@ -37,9 +39,21 @@ export default class LoginContainer extends Component {
         'Content-Type':'application/json'
       }
     }).then(response => response.json())
+      .then(responseAnswer  =>{
+        this.setState({userResponse: responseAnswer});
+        console.log(this.state.userResponse) //TODO: Remove
+    
+      //Add catch for failure
+    })
   }
-
+  handleResponse = event => {
+    if (this.state.userResponse['user'] != null && this.state.userResponse['user'].length === 0) {
+    console.log('true')
+    return "User does not exist"
+    }
+  }
   render() {
+    console.log(this.state.data) // TODO: Remove
     return (
     <Login 
       email={this.state.email}
@@ -47,6 +61,7 @@ export default class LoginContainer extends Component {
       handleChange={this.handleChange}
       validateForm={this.validateForm}
       handleSubmit={this.handleSubmit}
+      handleResponse={this.handleResponse}
     />
     );
   }
