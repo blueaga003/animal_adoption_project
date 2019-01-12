@@ -1,11 +1,10 @@
-.checkbox-group {
+label {
   font-family: Arial;
   text-align: left;
   line-height: normal;
-  display: block;
   font-size: 14.4px;
-  margin-bottom: 3px;
+  margin-bottom: .5rem;
   margin-right: 3.73px;
   border-spacing: 15px;
+  display: inherit;
 }
-
