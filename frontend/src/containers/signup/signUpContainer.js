@@ -10,9 +10,12 @@ class SignUpContainer extends Component {
     this.state = {
       email: "",
       password: "",
+      firstName: "",
+      lastName: "",
       species: [],
-      animal_activity_levels: [],
+      animalActivityLevels: [],
       gender: [],
+      userResponse: 0
     };
 
     this.validateForm = this.validateForm.bind(this)
@@ -21,7 +24,7 @@ class SignUpContainer extends Component {
   }
 
   validateForm() {
-    return this.state.email.length > 0 && this.state.password.length > 0;
+    return this.state.email.length > 0 && this.state.password.length > 0 && this.state.firstName.length > 0 && this.state.lastName.length > 0;
   }
 
   handleChange = event => {
@@ -35,25 +38,34 @@ class SignUpContainer extends Component {
     fetch('http://localhost:5000/signup', {
       credentials:'include',
       method:'POST',
-      body:'data'
+      body:JSON.stringify(this.state),
+      headers: {
+        'Accept':'application/json', 
+        'Content-Type':'application/json'
+      }
+    }).then(response  => response.text())
+       .then(responseAnswer =>{
+        this.setState({userResponse: responseAnswer});
+        console.log(this.state.userResponse) //TODO: Remove
+    
+      //Add catch for failure
     })
-    .then(response => response.json())
-    .then(() => {
-      this.props.history.goBack();
-    })
-    .catch((error) => {this.setState({isLoading: true, error})});
+   // .catch((error) => {this.setState({isLoading: true, error})});
     
     // Keep console.log for testing
     console.log(this.props)
   };
-
+//if this.state.data (wait, from constructor, provide feedback), conditional render
   render() {
+    console.log(this.state.userResponse)
     return (
       <SignUp
         email={this.state.email}
         password={this.state.password}
+        firstName={this.state.firstName}
+        lastName={this.state.lastName}
         species={this.state.species}
-        animal_activity_levels={this.state.animal_activity_levels}
+        animalActivityLevels={this.state.animaActivityLevels}
         gender={this.state.gender}
         validateForm={this.validateForm}
         handleChange={this.handleChange}

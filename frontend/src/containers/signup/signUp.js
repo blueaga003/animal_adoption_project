@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import SearchFormContainer from '../searchForm/searchFormContainer';
+import AnimalPreferencesContainer from '../animalPreferences/animalPreferencesContainer';
 import './signUp.css'
 
 class SignUp extends Component {
 
-  constructor(props) {
-    super(props)
-  };
+ // constructor(props) {
+ //   super(props)
+ // };
 
   render() { 
     return (
@@ -30,7 +30,23 @@ class SignUp extends Component {
               type="password"
             />
           </FormGroup>
-          <SearchFormContainer/>
+          <FormGroup controlId="firstName" bsSize="large">
+            <ControlLabel>First Name</ControlLabel>
+            <FormControl
+              value={this.props.firstName}
+              onChange={this.props.handleChange}
+              type="firstName"
+            />
+          </FormGroup>
+          <FormGroup controlId="lastName" bsSize="large">
+            <ControlLabel>Last Name</ControlLabel>
+            <FormControl
+              value={this.props.lastName}
+              onChange={this.props.handleChange}
+              type="lastName"
+            />
+          </FormGroup>
+          <AnimalPreferencesContainer/>
           <Button
             onClick={this.props.handleSubmit}
             block
