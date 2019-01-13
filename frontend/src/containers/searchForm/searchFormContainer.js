@@ -14,12 +14,11 @@ class SearchFormContainer extends Component {
 
       },
 
-    genderOptions: ['male', 'female'],
-    speciesOptions: ['dog', 'cat', 'horse'],
-    activityLevels: ['not active', 'slightly active', 'moderately active', 'highly active'],
+     genderOptions: ['male', 'female'],
+     speciesOptions: ['dog', 'cat', 'horse'],
+     activityLevels: ['not active', 'slightly active', 'moderately active', 'highly active'],
     //dogBreedOptions: []
   }
-
 
   this.handleGenderCheckBox = this.handleGenderCheckBox.bind(this);
   this.handleActivityLevelsCheckBox = this.handleActivityLevelsCheckBox.bind(this);
