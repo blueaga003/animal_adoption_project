@@ -4,6 +4,7 @@ secret_keys*
 location_data.json
 pet_data.json
 *.swl
+*.swk
 *.swo
 *.swp
 *.swn
