@@ -49,7 +49,7 @@ export default class LoginContainer extends Component {
   handleResponse = event => {
     if (this.state.userResponse['user'] != null && this.state.userResponse['user'].length === 0) {
     console.log('true')
-    return "User does not exist"
+    return "Username and password not in database"
     }
   }
   render() {
