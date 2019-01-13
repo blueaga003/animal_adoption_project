@@ -10,11 +10,10 @@ class User(db.Model):
 
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True,)
     email = db.Column(db.String(100), nullable=False, unique=True,)
-    username = db.Column(db.String(30), nullable=False, unique=True,)
     password = db.Column(db.String(30), nullable=False,)
     first_name = db.Column(db.String(25), nullable=False,)
     last_name = db.Column(db.String(25), nullable=False,)
-    default_location = db.Column(db.String(30), nullable=False,)
+    default_location = db.Column(db.String(30), default="San Francisco", nullable=False,)
     pet_preferences = db.relationship("PetPreference")
     rating = db.relationship("Rating")
     comment = db.relationship("Comment")
@@ -23,7 +22,7 @@ class User(db.Model):
     def __repr__(self):
         """Show info about user."""
 
-        return "< user_id={}, first_name={}, last_name={}, username={}, password={}, email={}, default_location={} >".format(self.user_id, self.first_name, self.last_name, self.username, self.password, self.email, self.default_location)
+        return "< user_id={}, first_name={}, last_name={}, password={}, email={}, default_location={} >".format(self.user_id, self.first_name, self.last_name, self.password, self.email, self.default_location)
 
     def filter_by(user):
         """Filter by user."""
@@ -90,16 +89,15 @@ class PetPreference(db.Model):
     pet_preferance_key = db.Column(db.Integer, primary_key=True, autoincrement=True,)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"),) #Use relationship to autofill value, don't need backref but useful to learn about
     species = db.Column(db.String(50), nullable=True,)
-    breed = db.Column(db.String(50), nullable=True,)
     activity_level = db.Column(db.String(50), nullable=True,)
-    age = db.Column(db.String(45), nullable=True,)
+   # age = db.Column(db.String(45), nullable=True,)
     sex = db.Column(db.String(45), nullable=True,)
    #TODO: Possible add more after viewing seed data
 
     def __repr__(self):
         """ Show info about user pet preferances."""
 
-        return "< user_id={}, animal_species={}, animal_breed={}, animal_activity_level={}, animal_age={}, animal_grooming_needs={}".format(self.user_id, self.animal_species, self.animal_breed, self.animal_activity_level, self.animal_age, self.animal_grooming_needs)
+        return "< user_id={}, species={}, activity_level={}".format(self.user_id, self.species, self.activity_level)
 
 class Comment(db.Model):
     """Comment model."""
