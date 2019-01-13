@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { CheckBox } from '../../components/check_box/checkBox';
-import { DropDown } from '../../components/drop_down/dropDown';
 import AnimalPreferences from "./animalPreferences";
+
 class AnimalPreferencesContainer extends Component {
   constructor(props) {
     super(props);
@@ -13,10 +12,10 @@ class AnimalPreferencesContainer extends Component {
         gender: [],
 
       },
-
-    genderOptions: ['male', 'female'],
-    speciesOptions: ['dog', 'cat', 'horse'],
-    activityLevels: ['not active', 'slightly active', 'moderately active', 'highly active'],
+      
+     genderOptions: ['male', 'female'],
+     speciesOptions: ['dog', 'cat', 'horse'],
+     activityLevels: ['not active', 'slightly active', 'moderately active', 'highly active'],
     //dogBreedOptions: []
   }
 
@@ -71,31 +70,23 @@ handleInput(e) {
 
   render() {
     return (
-      <form className='aniamlPreferences'>
-        <h2> Animal Preferences </h2>
-        <CheckBox title={'GENDER'}
-                  name={'gender'}
-                  options={this.state.genderOptions}
-                  selectedOptions={this.state.newUser.gender}
-                  value={this.state.value}
-                  handleChange={this.handleGenderCheckBox}
-                  />
-        <CheckBox title={'ACTIVITY LEVEL'}
-                  name={'animalActivityLevels'}
-                  options={this.state.activityLevels}
-                  selectedOptions={this.state.newUser.animalActivityLevels}
-                  value={this.state.value}
-                  handleChange={this.handleActivityLevelsCheckBox}
-                  />
+      <div className='aniamlPreferences'>
+        <AnimalPreferences
+          newUser={this.state.newUser}
+          species={this.state.species}
+          animalActivityLevels={this.state.animalActivityLevels}
+          gender={this.state.gender}
 
-       <DropDown title={'SPECIES'}
-               name={'species'}
-               options = {this.state.speciesOptions} 
-               value = {this.state.newUser.species}
-               placeholder = {'Select Species'}
-               handleChange = {this.handleInput}
-               />
-      </form>
+          genderOptions={this.state.genderOptions}
+          speciesOptions={this.state.speciesOptions}
+          activityLevels={this.state.activityLevels}
+
+          handleGenderCheckBox={this.handleGenderCheckBox}
+          handleActivityLevelsCheckBox={this.handleActivityLevelsCheckBox}
+          handleInput={this.handleInput}
+        />
+      </div>
+
     );
   }
 }
