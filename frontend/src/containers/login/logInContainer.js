@@ -40,20 +40,26 @@ export default class LoginContainer extends Component {
       }
     }).then(response => response.json())
       .then(responseAnswer  =>{
+        console.log("ResponseAnswer " + responseAnswer['error'])
         this.setState({userResponse: responseAnswer});
-        console.log(this.state.userResponse) //TODO: Remove
-    
+        console.log("UserResponse " + this.state.userResponse) //TODO: Remove
+
       //Add catch for failure
     })
   }
   handleResponse = event => {
-    if (this.state.userResponse['user'] != null && this.state.userResponse['user'].length === 0) {
-    console.log('true')
-    return "Username and password not in database"
+    console.log("HandleResponse:UserResponse : " + this.state.userResponse)
+    console.log("HandleResponse:userResponse['error'] :" +  this.state.userResponse['error'])
+    if (this.state.userResponse['user'] != null) {
+      console.log('true')
+      console.log(typeof("Typeof: "+ this.state.userResponse['user']))
+    }
+    else if (this.state.userResponse['error'] != null){
+        return this.state.userResponse['error']
     }
   }
   render() {
-    console.log(this.state.data) // TODO: Remove
+    console.log("data : " + this.state.data) // TODO: Remove
     return (
     <Login 
       email={this.state.email}

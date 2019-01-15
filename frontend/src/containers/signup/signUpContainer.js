@@ -21,6 +21,7 @@ class SignUpContainer extends Component {
     this.validateForm = this.validateForm.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleResponse = this.handleResponse.bind(this)
   }
 
   validateForm() {
@@ -43,20 +44,37 @@ class SignUpContainer extends Component {
         'Accept':'application/json', 
         'Content-Type':'application/json'
       }
-    }).then(response  => response.text())
+    }).then(response  => response.json())
        .then(responseAnswer =>{
         this.setState({userResponse: responseAnswer});
+        console.log("print 2")
         console.log(this.state.userResponse) //TODO: Remove
     
       //Add catch for failure
     })
+
    // .catch((error) => {this.setState({isLoading: true, error})});
     
     // Keep console.log for testing
     console.log(this.props)
   };
+
+  handleResponse = event => {
+   
+   console.log("this.state.userResponse['error'] "  + this.state.userResponse['error'])
+   console.log("this.state.userResponse Handle " + this.state.userResponse)
+   if(this.state.userResponse['user'] != null) {
+      // Change path
+      return "The user " + this.state.userResponse['user'] + " has been created!"
+    }
+   else if (this.state.userResponse['error'] != null) {
+
+    return this.state.userResponse['error']
+    }
+  }
 //if this.state.data (wait, from constructor, provide feedback), conditional render
   render() {
+    console.log('print 1')
     console.log(this.state.userResponse)
     return (
       <SignUp
@@ -65,10 +83,11 @@ class SignUpContainer extends Component {
         firstName={this.state.firstName}
         lastName={this.state.lastName}
         species={this.state.species}
-        animalActivityLevels={this.state.animaActivityLevels}
+        animalActivityLevels={this.state.animalActivityLevels}
         gender={this.state.gender}
         validateForm={this.validateForm}
         handleChange={this.handleChange}
+        handleResponse={this.handleResponse}
         handleSubmit={this.handleSubmit}
       />
     );
@@ -76,3 +95,5 @@ class SignUpContainer extends Component {
 }
 
 export default SignUpContainer;
+
+// Passing around values new user state, to state for checkBoxes

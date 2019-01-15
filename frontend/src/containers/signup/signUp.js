@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import AnimalPreferencesContainer from '../animalPreferences/animalPreferencesContainer';
+import AnimalPreferencesContainer from '../animalPreferences/animalPreferencesContainer2';
 import './signUp.css'
 
 class SignUp extends Component {
@@ -57,6 +57,9 @@ class SignUp extends Component {
             Signup
           </Button>
         </form> 
+        <div className="UserActivity">
+          {this.props.handleResponse()}
+        </div>
       </div>
     );
   }
