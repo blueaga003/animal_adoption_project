@@ -3,14 +3,12 @@ import { CheckBox } from '../../components/check_box/checkBox';
 import { DropDown } from '../../components/drop_down/dropDown';
 
 class AnimalPreferences extends Component {
- // constructor(props) {
- //   super(props);
-//
- // }
-
+ constructor(props) {
+   super(props)
+}
   render() {
     return (
-      <div className='aniamlPreferences'>
+      <div className='animalPreferences'>
         <h2> Animal Preferences </h2>
         <h6> Optionally enter search preferences </h6>
         <CheckBox title={'GENDER'}
@@ -18,14 +16,14 @@ class AnimalPreferences extends Component {
                   options={this.props.genderOptions}
                   selectedOptions={this.props.newUser.gender}
                   value={this.props.value}
-                  handleChange={this.handleGenderCheckBox}
+                  handleChange={this.props.handleGenderCheckBox}
                   />
         <CheckBox title={'ACTIVITY LEVEL'}
                   name={'animalActivityLevels'}
                   options={this.props.activityLevels}
                   selectedOptions={this.props.newUser.animalActivityLevels}
                   value={this.props.value}
-                  handleChange={this.handleActivityLevelsCheckBox}
+                  handleChange={this.props.handleActivityLevelsCheckBox}
                   />
 
        <DropDown title={'SPECIES'}
@@ -33,7 +31,7 @@ class AnimalPreferences extends Component {
                options = {this.props.speciesOptions} 
                value={this.props.newUser.species}
                placeholder={'Select Species'}
-               handleChange={this.handleInput}
+               handleChange={this.props.handleInput}
                />
       </div>
     );
@@ -41,3 +39,5 @@ class AnimalPreferences extends Component {
 }
 
 export default AnimalPreferences;
+
+               //handleChange={this.handleInput}

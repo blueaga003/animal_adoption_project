@@ -22,11 +22,11 @@ class AnimalPreferencesContainer extends Component {
 
   this.handleGenderCheckBox = this.handleGenderCheckBox.bind(this);
   this.handleActivityLevelsCheckBox = this.handleActivityLevelsCheckBox.bind(this);
+
   this.handleInput = this.handleInput.bind(this);
 
 }
 handleGenderCheckBox(e) {
-
     const newSelection = e.target.value;
     let newSelectionArray;
 
@@ -40,13 +40,16 @@ handleGenderCheckBox(e) {
         {...prevState.newUser, gender: newSelectionArray }
       })
       )
+
+      console.log("GenderState ")
+      console.log("GenderCheckBox: " + this.state)
+      this.props.handeDataBind({gender: newSelectionArray});
 }
 
 handleActivityLevelsCheckBox(e) {
 
     const newSelection = e.target.value;
     let newSelectionArray;
-
     if(this.state.newUser.animalActivityLevels.indexOf(newSelection) > -1) {
       newSelectionArray = this.state.newUser.animalActivityLevels.filter(s => s !== newSelection)
     } else {
@@ -57,6 +60,10 @@ handleActivityLevelsCheckBox(e) {
         {...prevState.newUser, animalActivityLevels: newSelectionArray }
       })
       )
+      console.log("ActivtyLevelState ")
+      console.log("ActivityLevelCheckBox: " + this.state)
+      console.log(this.state)
+      this.props.handeDataBind({animalActivityLevels: newSelectionArray});
 }
 
 handleInput(e) {
@@ -65,12 +72,14 @@ handleInput(e) {
    this.setState( prevState => ({ newUser : 
         {...prevState.newUser, [name]: value
         }
-      }), () => console.log(this.state.newUser));
+      }), () => console.log("handleInput: " + this.state.newUser));
+
+      this.props.handeDataBind({species: value});
   }
 
-  render() {
+render() {
     return (
-      <div className='aniamlPreferences'>
+      <div className='animalPreferences'>
         <AnimalPreferences
           newUser={this.state.newUser}
           species={this.state.species}
@@ -92,3 +101,6 @@ handleInput(e) {
 }
 
 export default AnimalPreferencesContainer;
+
+
+          //handleInput={this.handleInput}

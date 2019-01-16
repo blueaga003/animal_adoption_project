@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import AnimalPreferencesContainer from '../animalPreferences/animalPreferencesContainer2';
+import AnimalPreferencesContainer from '../animalPreferences/animalPreferencesContainer';
 import './signUp.css'
 
 class SignUp extends Component {
@@ -46,7 +46,9 @@ class SignUp extends Component {
               type="lastName"
             />
           </FormGroup>
-          <AnimalPreferencesContainer/>
+          <AnimalPreferencesContainer
+             handeDataBind={this.props.handeDataBind}
+          />
           <Button
             onClick={this.props.handleSubmit}
             block

@@ -22,6 +22,7 @@ class SignUpContainer extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleResponse = this.handleResponse.bind(this)
+    this.handeDataBind = this.handeDataBind.bind(this)
   }
 
   validateForm() {
@@ -33,6 +34,12 @@ class SignUpContainer extends Component {
       [event.target.id]: event.target.value
     });
   }
+
+  handeDataBind = (dataFromGenderCheckBox) => {
+    this.setState(dataFromGenderCheckBox)
+    console.log("Does something")
+    // Put data here
+  } //Do I need a comma after this?
 
   handleSubmit(event){
     event.preventDefault();
@@ -88,6 +95,7 @@ class SignUpContainer extends Component {
         validateForm={this.validateForm}
         handleChange={this.handleChange}
         handleResponse={this.handleResponse}
+        handeDataBind={this.handeDataBind}
         handleSubmit={this.handleSubmit}
       />
     );
