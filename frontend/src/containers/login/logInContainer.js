@@ -53,6 +53,7 @@ export default class LoginContainer extends Component {
     if (this.state.userResponse['user'] != null) {
       console.log('true')
       console.log(typeof("Typeof: "+ this.state.userResponse['user']))
+      return this.props.history.push("/")
     }
     else if (this.state.userResponse['error'] != null){
         return this.state.userResponse['error']
