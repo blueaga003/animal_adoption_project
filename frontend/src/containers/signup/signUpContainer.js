@@ -72,7 +72,9 @@ class SignUpContainer extends Component {
    console.log("this.state.userResponse Handle " + this.state.userResponse)
    if(this.state.userResponse['user'] != null) {
       // Change path
-      return "The user " + this.state.userResponse['user'] + " has been created!"
+      //return "The user " + this.state.userResponse['user'] + " has been created!"
+      // return <Redirect to="/" />
+      this.props.history.push("/")
     }
    else if (this.state.userResponse['error'] != null) {
 
