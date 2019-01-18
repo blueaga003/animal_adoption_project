@@ -15,7 +15,8 @@ class SignUpContainer extends Component {
       species: [],
       animalActivityLevels: [],
       gender: [],
-      userResponse: 0
+      userResponse: 0,
+    
     };
 
     this.validateForm = this.validateForm.bind(this)
@@ -49,12 +50,14 @@ class SignUpContainer extends Component {
       body:JSON.stringify(this.state),
       headers: {
         'Accept':'application/json', 
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        'Authorization' : 'Bearer ' + this.state.userResponse['user']
       }
     }).then(response  => response.json())
        .then(responseAnswer =>{
         this.setState({userResponse: responseAnswer});
         console.log("print 2")
+        localStorage.setItem("Token", responseAnswer['access_token'])
         console.log(this.state.userResponse) //TODO: Remove
     
       //Add catch for failure
@@ -71,10 +74,12 @@ class SignUpContainer extends Component {
    console.log("this.state.userResponse['error'] "  + this.state.userResponse['error'])
    console.log("this.state.userResponse Handle " + this.state.userResponse)
    if(this.state.userResponse['user'] != null) {
+      this.setState({authCookie : this.state.userResponse['access_token']})
+      console.log("authCookie" + this.state.authCookie)
       // Change path
       //return "The user " + this.state.userResponse['user'] + " has been created!"
       // return <Redirect to="/" />
-      this.props.history.push("/")
+      this.props.history.push("/petSearch")
     }
    else if (this.state.userResponse['error'] != null) {
 
