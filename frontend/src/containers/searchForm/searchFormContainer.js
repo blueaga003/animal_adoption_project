@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { CheckBox } from '../../components/check_box/checkBox';
 import { DropDown } from '../../components/drop_down/dropDown';
+import { Button } from "react-bootstrap";
 
 class SearchFormContainer extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class SearchFormContainer extends Component {
         species: '',
         animalActivityLevels: [],
         gender: [],
+        userResponse: 0
 
       },
 
@@ -56,8 +58,7 @@ handleActivityLevelsCheckBox(e) {
 
       this.setState( prevState => ({ newUser:
         {...prevState.newUser, animalActivityLevels: newSelectionArray }
-      })
-      )
+      }), () => console.log(this.state.newUser))
 }
 
 handleInput(e) {
@@ -68,27 +69,15 @@ handleInput(e) {
         }
       }), () => console.log(this.state.newUser))
   }
-  handleFormSubmit(e) {
-    e.preventDefault();
-    let userData = this.state.newUser;
+handleFormSubmit(e) {
 
-    fetch('http://example.com',{
-        method: "POST",
-        body: JSON.stringify(userData),
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-      }).then(response => {
-        response.json().then(data =>{
-          console.log("Successful" + data);
-        })
-    })
-  }   
+  }
+
 
   render() {
+
     return (
-      <form className='aniamlSearchWants' onSubmit={this.handleFormSubmit}>
+      <form className='animalSearchWants' onSubmit={this.handleFormSubmit}>
         <h2> Search Preferances </h2>
         <CheckBox title={'GENDER'}
                   name={'gender'}
@@ -105,13 +94,20 @@ handleInput(e) {
                   handleChange={this.handleActivityLevelsCheckBox}
                   />
 
-       <DropDown title={'SPECIES'}
+        <DropDown title={'SPECIES'}
                name={'species'}
                options = {this.state.speciesOptions} 
                value = {this.state.newUser.species}
                placeholder = {'Select Species'}
                handleChange = {this.handleInput}
                />
+        <Button
+          block
+          bsSize="large"
+          type="submit"
+        >
+          Search
+        </Button>
       </form>
     );
   }
