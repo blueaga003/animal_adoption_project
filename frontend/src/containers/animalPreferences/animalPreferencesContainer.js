@@ -43,7 +43,7 @@ handleGenderCheckBox(e) {
 
       console.log("GenderState ")
       console.log("GenderCheckBox: " + this.state)
-      this.props.handeDataBind({gender: newSelectionArray});
+      this.props.handleDataBind({gender: newSelectionArray});
 }
 
 handleActivityLevelsCheckBox(e) {
@@ -63,7 +63,7 @@ handleActivityLevelsCheckBox(e) {
       console.log("ActivtyLevelState ")
       console.log("ActivityLevelCheckBox: " + this.state)
       console.log(this.state)
-      this.props.handeDataBind({animalActivityLevels: newSelectionArray});
+      this.props.handleDataBind({animalActivityLevels: newSelectionArray});
 }
 
 handleInput(e) {
@@ -74,7 +74,7 @@ handleInput(e) {
         }
       }), () => console.log("handleInput: " + this.state.newUser));
 
-      this.props.handeDataBind({species: value});
+      this.props.handleDataBind({species: value});
   }
 
 render() {
