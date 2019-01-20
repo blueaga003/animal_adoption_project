@@ -120,20 +120,21 @@ class Pet(db.Model):
 
     __tablename__ = "pets"
     animal_id = db.Column(db.Integer, primary_key=True, unique=True,)
-    animal_name = db.Column(db.String(50), nullable=False,)
-    animal_species = db.Column(db.String(50), nullable=False,)
-    animal_breed = db.Column(db.String(50), nullable=False,)
+    name = db.Column(db.String(50), nullable=False,)
+    species = db.Column(db.String(50), nullable=False,)
+    breed = db.Column(db.String(50), nullable=False,)
     active_levels = db.Column(db.String(50), default="Unknown",)
     gender = db.Column(db.String(10), nullable=False,)
-    animal_age = db.Column(db.String(45), nullable=False, default="Unknown",)
-    animal_grooming_needs = db.Column(db.String(45), nullable=False, default="Unknown")
-    animal_adoption_status = db.Column(db.String(1), nullable=False, default="Y")
-    animal_url = db.Column(db.String(200),nullable=True,)
+    age = db.Column(db.String(45), nullable=False, default="Unknown",)
+    grooming_needs = db.Column(db.String(45), nullable=False, default="Unknown")
+    adoption_status = db.Column(db.String(1), nullable=False, default="Y")
+    url = db.Column(db.String(200),nullable=True,)
 
     def __repr__(self):
         """ Show info about pets."""
 
-        return "< animal_id={}, animal_name={}, animal_species={}, animal_breed={}, active_levels={}, animal_age={}, animal_grooming_needs={}".format(self.animal_id, self.animal_name, self.animal_species, self.animal_breed, self.active_levels, self.animal_age, self.animal_grooming_needs, self.animal_adoption_status, self.animal_url)
+        return "animal_id : {}, name : {}.".format(self.animal_id, self.name)
+       # return "animal_id={}, name={}, species={}, breed={}, active_levels={},gender={}, age={}, grooming_needs={}".format(self.animal_id, self.name, self.species, self.breed, self.active_levels, self.gender, self.age, self.grooming_needs)
 
     def update_pets():
         """Adds new pet data to database."""
@@ -143,24 +144,24 @@ class Pet(db.Model):
         new_pets = []
         i = 0
         for pet in all_new_pets["pets"]:
-            new_entry = Pet(animal_id = pet["animalID"], animal_name = pet["name"].title(), animal_species = pet["species"].lower(), gender=pet['sex'].lower(), animal_breed = pet["primaryBreed"].lower(), active_levels =  pet["activityLevel"].lower(), animal_age = pet["age"].lower(), animal_grooming_needs = pet["groomingNeeds"].lower(), animal_url = "NA")
+            new_entry = Pet(animal_id = pet["animalID"], name = pet["name"].title(), species = pet["species"].lower(), gender=pet['sex'].lower(), breed = pet["primaryBreed"].lower(), active_levels = pet["activityLevel"].lower(), age = pet["age"].lower(), grooming_needs = pet["groomingNeeds"].lower(), url = "NA")
             # Cleaning data
             # Does not include pet if the species is not listed
-            if new_entry.animal_species == "":
+            if new_entry.species == "":
                 continue
-            if new_entry.animal_breed == "":
-                new_entry.animal_breed = "unknown"
+            if new_entry.breed == "":
+                new_entry.breed = "unknown"
             # Does not include pet if the name has more than two spaces or certain symbols (data cleaning)
-            if (new_entry.animal_name.count(" ")) > 1:
+            if (new_entry.name.count(" ")) > 1:
                 continue
-            #if re.search("*-(", new_entry.animal_name):
+            #if re.search("*-(", new_entry.name):
             #       continue
             if new_entry.active_levels =="":
                 new_entry.active_levels = "unknown"
-            if new_entry.animal_age =="":
-                new_entry.animal_age = "unknown"
-            if new_entry.animal_grooming_needs =="":
-                new_entry.animal_grooming_needs = "unknown"
+            if new_entry.age =="":
+                new_entry.age = "unknown"
+            if new_entry.grooming_needs =="":
+                new_entry.grooming_needs = "unknown"
 
             new_pets.append(new_entry)
             
