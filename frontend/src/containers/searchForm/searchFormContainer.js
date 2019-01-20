@@ -47,7 +47,7 @@ handleGenderCheckBox(e) {
       })
       )
 
-     // this.props.handleDataBind({gender: newSelectionArray});
+      this.props.handleDataBind({gender: newSelectionArray});
 }
 
 handleActivityLevelsCheckBox(e) {
@@ -64,7 +64,7 @@ handleActivityLevelsCheckBox(e) {
       this.setState( prevState => ({ newUser:
         {...prevState.newUser, animalActivityLevels: newSelectionArray }
       }), () => console.log(this.state.newUser))
-    //  this.props.handleDataBind({animalActivityLevels: newSelectionArray});
+      this.props.handleDataBind({animalActivityLevels: newSelectionArray});
 }
 
 handleInput(e) {
@@ -74,16 +74,25 @@ handleInput(e) {
         {...prevState.newUser, [name]: value
         }
       }), () => console.log(this.state.newUser))
-     //  this.props.handleDataBind({species: value});
 }
 handleFormSubmit(event) {
   let accessToken = localStorage.getItem('Token');
+  let backendInfo = {}
+  if ((this.state.newUser.gender.length === 0) && (this.state.newUser.species.length === 0) && (this.state.newUser.animalActivityLevels.length === 0)) {
+    backendInfo.gender = this.state.newUser.defaultGender
+    backendInfo.species = this.state.newUser.defaultSpecies
+    backendInfo.activityLevels = this.state.newUser.defaultActivityLevels
+  } else {
+    backendInfo.gender = this.state.newUser.gender
+    backendInfo.species = this.state.newUser.species
+    backendInfo.activityLevels = this.state.newUser.animalActivityLevels
+  }
   // set default in state
   event.preventDefault();
   fetch('http://localhost:5000/petSearch', {
     credentials:'include',
     method:'POST',
-    body:JSON.stringify(this.state),
+    body:JSON.stringify(backendInfo),
     headers: {
       'Accept':'application/json',
       'Content-Type':'application/json',
@@ -93,11 +102,10 @@ handleFormSubmit(event) {
     .then(responseAnswer => {
        this.setState({userResponse: responseAnswer});
        console.log('userResponse: ' + this.state.userResponse);
-       console.log('accessToken: ' + accessToken);
     })
 };
 
-
+// set userResponse -> handleDataBind to pass it to the "homepage" component
   render() {
 
     return (
