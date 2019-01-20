@@ -12,8 +12,11 @@ class SearchFormContainer extends Component {
         species: '',
         animalActivityLevels: [],
         gender: [],
-        userResponse: 0
-
+        userResponse: 0,
+        defaultSpecies: '',
+        defaultSpeciesOptions: ['dog', 'cat', 'horse'],
+        defaultActivityLevels: ['not active', 'slightly active', 'moderately active', 'highly active'],
+        defaultGender: ['male', 'female'],
       },
 
      genderOptions: ['male', 'female'],
@@ -26,8 +29,8 @@ class SearchFormContainer extends Component {
   this.handleActivityLevelsCheckBox = this.handleActivityLevelsCheckBox.bind(this);
   this.handleInput = this.handleInput.bind(this);
   this.handleFormSubmit = this.handleFormSubmit.bind(this);
-
 }
+
 handleGenderCheckBox(e) {
 
     const newSelection = e.target.value;
@@ -43,6 +46,8 @@ handleGenderCheckBox(e) {
         {...prevState.newUser, gender: newSelectionArray }
       })
       )
+
+     // this.props.handleDataBind({gender: newSelectionArray});
 }
 
 handleActivityLevelsCheckBox(e) {
@@ -59,6 +64,7 @@ handleActivityLevelsCheckBox(e) {
       this.setState( prevState => ({ newUser:
         {...prevState.newUser, animalActivityLevels: newSelectionArray }
       }), () => console.log(this.state.newUser))
+    //  this.props.handleDataBind({animalActivityLevels: newSelectionArray});
 }
 
 handleInput(e) {
@@ -68,10 +74,28 @@ handleInput(e) {
         {...prevState.newUser, [name]: value
         }
       }), () => console.log(this.state.newUser))
-  }
-handleFormSubmit(e) {
-
-  }
+     //  this.props.handleDataBind({species: value});
+}
+handleFormSubmit(event) {
+  let accessToken = localStorage.getItem('Token');
+  // set default in state
+  event.preventDefault();
+  fetch('http://localhost:5000/petSearch', {
+    credentials:'include',
+    method:'POST',
+    body:JSON.stringify(this.state),
+    headers: {
+      'Accept':'application/json',
+      'Content-Type':'application/json',
+      'Authorization':'Bearer ' + accessToken
+    }
+  }).then(response => response.json())
+    .then(responseAnswer => {
+       this.setState({userResponse: responseAnswer});
+       console.log('userResponse: ' + this.state.userResponse);
+       console.log('accessToken: ' + accessToken);
+    })
+};
 
 
   render() {
