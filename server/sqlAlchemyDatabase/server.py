@@ -15,6 +15,13 @@ jwt = JWTManager(app)
 CORS(app, supports_credentials=True)
 app.secret_key = 'AB'
 
+def Caps(word_list):
+    new_list = []
+    for word in word_list:
+        word = word.title()
+        new_list.append(word)
+    return word
+
 @app.route('/signup', methods = ['GET', 'POST'])
 def signup():
     """User signup."""
@@ -88,10 +95,27 @@ def petSearch():
     """Pet Search."""
     if request.method == 'POST':
         data = request.get_json()
-        
         print(data)
+        genders = data['gender']
+       # genders = Caps(genders)
+        species = str(data['species'])
+       # species = Caps(species)
+        active_levels = data['activityLevels']
+        print(active_levels)
+       # active_levels = Caps(active_levels)
+        if (genders != [] and species != [] and active_levels != []):
+            pet_query = db.session.query(Pet).filter(Pet.animal_activity_level.in_(["Unknown", "Slightly Active"]), Pet.animal_species=="Cat").all()
+        #    pet_query = db.session.query(Pet).filter(
+ # Pet.animal_gender=='female'))
+#(animal_activity_level=active_levels).all()
+            print("pet_query: " + str(pet_query))
+        #search_query = db.session.query(Pets).filter_by(
+       # print("pet_query: " + str(pet_query))
+        return jsonify(data)
 
 # Crete an endpoint to validate the token
+
+
 if __name__ == "__main__":
     app.debug = True
     DebugToolbarExtension(app)
