@@ -23,7 +23,7 @@ class SignUpContainer extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleResponse = this.handleResponse.bind(this)
-    this.handeDataBind = this.handeDataBind.bind(this)
+    this.handleDataBind = this.handleDataBind.bind(this)
   }
 
   validateForm() {
@@ -36,13 +36,13 @@ class SignUpContainer extends Component {
     });
   }
 
-  handeDataBind = (dataFromGenderCheckBox) => {
-    this.setState(dataFromGenderCheckBox)
+  handleDataBind = (dataFromStates) => {
+    this.setState(dataFromStates)
     console.log("Does something")
     // Put data here
   } //Do I need a comma after this?
 
-  handleSubmit(event){
+  handleSubmit(event) {
     event.preventDefault();
     fetch('http://localhost:5000/signup', {
       credentials:'include',
@@ -51,14 +51,13 @@ class SignUpContainer extends Component {
       headers: {
         'Accept':'application/json', 
         'Content-Type':'application/json',
-        'Authorization' : 'Bearer ' + this.state.userResponse['user']
       }
     }).then(response  => response.json())
-       .then(responseAnswer =>{
-        this.setState({userResponse: responseAnswer});
-        console.log("print 2")
-        localStorage.setItem("Token", responseAnswer['access_token'])
-        console.log(this.state.userResponse) //TODO: Remove
+      .then(responseAnswer => {
+         this.setState({userResponse: responseAnswer});
+          console.log("print 2")
+          localStorage.setItem("Token", responseAnswer['access_token'])
+          console.log(this.state.userResponse) //TODO: Remove
     
       //Add catch for failure
     })
@@ -102,7 +101,7 @@ class SignUpContainer extends Component {
         validateForm={this.validateForm}
         handleChange={this.handleChange}
         handleResponse={this.handleResponse}
-        handeDataBind={this.handeDataBind}
+        handleDataBind={this.handleDataBind}
         handleSubmit={this.handleSubmit}
       />
     );

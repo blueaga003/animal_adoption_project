@@ -47,7 +47,7 @@ class SignUp extends Component {
             />
           </FormGroup>
           <AnimalPreferencesContainer
-             handeDataBind={this.props.handeDataBind}
+             handleDataBind={this.props.handleDataBind}
           />
           <Button
             onClick={this.props.handleSubmit}
