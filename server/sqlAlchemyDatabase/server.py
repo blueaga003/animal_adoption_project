@@ -5,7 +5,7 @@ from model import User, connect_to_db, db, Location, Rating, PetPreference, Comm
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
-from functools import wraps
+import json
 
 #TODO: Import secret key and change to variable
 
@@ -67,7 +67,6 @@ def login():
         data = request.get_json()
         user_email = data['email']
         user_query = db.session.query(User).filter_by(email=user_email).first()
-        print(user_query.password)
         access_token = create_access_token(identity = data['email'])
         refresh_token = create_refresh_token(identity = data['password'])
         if user_query == None or user_query.password != data['password']:
@@ -75,14 +74,12 @@ def login():
         user_info = {'user':data['email']}
         return jsonify(user_info)
 
-        #model.User.query.filterby(model.User
 #put in session as logged in
         print("success login")
         return "hi"
     if request.method == 'GET':
        return "hey"
 #Set session/cookie
-
 
 @app.route('/petSearch', methods = ['GET', 'POST'])
 @jwt_required
@@ -91,20 +88,25 @@ def petSearch():
     if request.method == 'POST':
         data = request.get_json()
         genders = data['gender']
-        species = str(data['species'])
+        front_species = str(data['species'])
         active_levels = data['activityLevels']
         pet_query = db.session.query(Pet)
         if active_levels != []:
             pet_query = pet_query.filter(Pet.active_levels.in_(active_levels))
-        if species != '':
-             pet_query = pet_query.filter(Pet.animal_species==species)
+        if front_species != '':
+             pet_query = pet_query.filter(Pet.species==front_species)
         if genders != []:
             pet_query = pet_query.filter(Pet.gender.in_(genders))
         final_pet_query = pet_query.all()
-        print("pet_query: " + str(final_pet_query))
-        return jsonify(data)
-
-
+        if final_pet_query != []:
+            selections = []
+            pet_return_data = {}
+            for pet in final_pet_query:
+                selections.append((pet.toString()))
+            return jsonify({"pets" : selections})
+        else:
+            return jsonify({'error':'No results'})
+        return jsonify('hi')
 
 if __name__ == "__main__":
     app.debug = True
