@@ -129,11 +129,26 @@ class Pet(db.Model):
     grooming_needs = db.Column(db.String(45), nullable=False, default="Unknown")
     adoption_status = db.Column(db.String(1), nullable=False, default="Y")
     url = db.Column(db.String(200),nullable=True,)
+    def toString(self):
+        """ Show info about pets."""
+
+        return json.dumps({'animal_id': self.animal_id, 
+                'name': self.name,
+                'gender': self.gender,
+                'active_levels': self.active_levels,
+                'age': self.age,
+                'breed': self.breed,
+                'species': self.species
+               })
 
     def __repr__(self):
         """ Show info about pets."""
 
-        return "animal_id : {}, name : {}.".format(self.animal_id, self.name)
+        return json.dumps({'animal_id': self.animal_id, 
+                'name': self.name,
+                'gender': self.gender
+               })
+       # return dict("{" + "\'animal_id\': {}, \'name\' : {}".format(self.animal_id, self.name)+ "}")
        # return "animal_id={}, name={}, species={}, breed={}, active_levels={},gender={}, age={}, grooming_needs={}".format(self.animal_id, self.name, self.species, self.breed, self.active_levels, self.gender, self.age, self.grooming_needs)
 
     def update_pets():
