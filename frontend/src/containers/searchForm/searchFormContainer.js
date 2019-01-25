@@ -14,7 +14,7 @@ class SearchFormContainer extends Component {
         gender: [],
         userResponse: 0,
         defaultSpecies: '',
-        defaultSpeciesOptions: ['dog', 'cat', 'horse'],
+        defaultSpeciesOptions: ['dog', 'cat', 'horse', 'unknown'],
         defaultActivityLevels: ['not active', 'slightly active', 'moderately active', 'highly active', 'unknown'],
         defaultGender: ['male', 'female', 'unknown'],
       },
@@ -101,6 +101,7 @@ handleFormSubmit(event) {
   }).then(response => response.json())
     .then(responseAnswer => {
        this.setState({userResponse: responseAnswer});
+       this.props.handleDataBind({userResponse: responseAnswer});
        console.log('userResponse: ' + this.state.userResponse);
        console.log(this.state.userResponse)
     })
