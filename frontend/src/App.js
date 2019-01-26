@@ -5,6 +5,7 @@ import NavBar from './components/nav_bar/navBar';
 import HomePage from './containers/homepageContainer';
 import LogInContainer from './containers/login/logInContainer';
 import SignUpContainer from './containers/signup/signUpContainer';
+import DisplayResults from './containers/resultsContainer';
 // import other components we want to render here such as a NAVBAR for example
 
 class App extends Component {
@@ -16,7 +17,7 @@ class App extends Component {
             <NavBar/>
           </header>
        <Route exact={true} path='/' component = { HomePage } />
-       <Route path='/petSearch' component = { HomePage } />
+       <Route path='/petSearch' component = { DisplayResults } />
        <Route path='/login' component = { LogInContainer } />
        <Route path='/signup' component = { SignUpContainer } />
        </div>
