@@ -26,9 +26,7 @@ handleResponse = event => {
       <div className='petDisplay' >
         <DisplayPet
           name={this.props.userResponse['pets']}
-          species={"props.species"}
-          
-          
+          options={this.props.userResponse['pets']}
         />
       </div>
     );

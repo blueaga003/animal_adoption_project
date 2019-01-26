@@ -3,13 +3,20 @@ import React, {Component} from 'react';
 const DisplayPet = (props) => {
   return (
     <div className="display-pet">
-       <div>
-         name={props.name}
-         image={props.image}
-         species={props.species}
-         activeLevels={props.activeLevels}
-         breed={props.breed}
-       </div>
+      {props.options.map(option => {
+        return (
+          <label key={option}>
+            <div>
+              className="pet"
+              name={option}
+              image={option}
+              species={option}
+              activeLevels={option}
+              breed={option}
+            </div>
+          </label>
+        );
+      })}
     </div>
 )}
 
