@@ -55,9 +55,8 @@ class SignUpContainer extends Component {
     }).then(response  => response.json())
       .then(responseAnswer => {
          this.setState({userResponse: responseAnswer});
-          console.log("print 2")
           localStorage.setItem("Token", responseAnswer['access_token'])
-          console.log(this.state.userResponse) //TODO: Remove
+     //     console.log(this.state.userResponse) //TODO: Remove
     
       //Add catch for failure
     })
@@ -65,16 +64,13 @@ class SignUpContainer extends Component {
    // .catch((error) => {this.setState({isLoading: true, error})});
     
     // Keep console.log for testing
-    console.log(this.props)
+    //console.log(this.props)
   };
 
   handleResponse = event => {
    
-   console.log("this.state.userResponse['error'] "  + this.state.userResponse['error'])
-   console.log("this.state.userResponse Handle " + this.state.userResponse)
    if(this.state.userResponse['user'] != null) {
       this.setState({authCookie : this.state.userResponse['access_token']})
-      console.log("authCookie" + this.state.authCookie)
       // Change path
       //return "The user " + this.state.userResponse['user'] + " has been created!"
       // return <Redirect to="/" />
