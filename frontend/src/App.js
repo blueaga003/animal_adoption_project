@@ -19,7 +19,7 @@ class App extends Component {
        <Route exact={true} path='/' component = { HomePage } />
        <Route path='/petSearch' component = { DisplayResults } />
        <Route path='/login' component = { LogInContainer } />
-       <Route path='/signup' component = { SignUpContainer } />
+       <Route path='/register' component = { SignUpContainer } />
        </div>
      </Router>
     );

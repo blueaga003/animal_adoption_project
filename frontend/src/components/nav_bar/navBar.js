@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Collapse, Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import './navBar.css'
 class NavBar extends Component {
+
 constructor(props) {
   super(props);
 
@@ -23,7 +24,7 @@ render() {
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink href="/signup">Signup</NavLink>
+              <NavLink href="/register">Register</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="/login">Login</NavLink>

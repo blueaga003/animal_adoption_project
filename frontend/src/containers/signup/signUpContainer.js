@@ -44,7 +44,7 @@ class SignUpContainer extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    fetch('http://localhost:5000/signup', {
+    fetch('http://localhost:5000/register', {
       credentials:'include',
       method:'POST',
       body:JSON.stringify(this.state),
