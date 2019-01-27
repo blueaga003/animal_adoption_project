@@ -99,6 +99,7 @@ handleFormSubmit(event) {
       'Authorization':'Bearer ' + accessToken
     }
   }).then(response => response.json())
+    // response = JSON.parse(response)
     .then(responseAnswer => {
        this.setState({userResponse: responseAnswer});
        this.props.handleDataBind({userResponse: responseAnswer});
