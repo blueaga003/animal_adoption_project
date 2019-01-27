@@ -3,9 +3,6 @@ import { CheckBox } from '../../components/check_box/checkBox';
 import { DropDown } from '../../components/drop_down/dropDown';
 
 class AnimalPreferences extends Component {
- constructor(props) {
-   super(props)
-}
   render() {
     return (
       <div className='animalPreferences'>
