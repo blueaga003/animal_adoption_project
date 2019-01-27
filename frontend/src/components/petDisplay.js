@@ -1,23 +1,17 @@
-import React, {Component} from 'react';
+import React  from 'react';
 
 const DisplayPet = (props) => {
   return (
     <div className="display-pet">
-      {props.options.map(option => {
-        return (
-          <label key={option}>
             <div>
-              className="pet"
-              name={option}
-              image={option}
-              species={option}
-              activeLevels={option}
-              breed={option}
+             <p> {props.name} </p>
+              {props.species}
+              {props.breed}
+              {props.gender}
+              {props.age}
             </div>
-          </label>
-        );
-      })}
     </div>
-)}
+  );
+}
 
 export { DisplayPet };

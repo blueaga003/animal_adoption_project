@@ -15,7 +15,6 @@ class DisplayResults extends Component {
     };
 
   this.handleDataBind = this.handleDataBind.bind(this)
-  this.handleResponse = this.handleResponse.bind(this)
 
 //  this.handleResponse = this.handleResonse.bind(this)
 }
@@ -26,34 +25,29 @@ handleDataBind = (dataFromStates) => {
   console.log("FORREAL!")
 }
 
-//handleFormSubmit(event)//{
-// let accessToken = localStorage.getItem('Token');
-// event.preventDefault();
-// fetch('http://localhost:5000/petSearch', {
-//   credentials:'include',
-//   method:'POST',
-//   body:JSON.stringify(this.state),
-//   headers: {
-//     'Accept':'application/json',
-//     'Content-Type':'application/json',
-//     'Authorization':'Bearer ' + accessToken
-//   }
-// }).then(response => response.json())
-//   .then(responseAnswer => {
-//      this.setState({userResponse: responseAnswer});
-//      console.log('userResponse: ' + this.state.userResponse);
-//      console.log('accessToken: ' + accessToken);
-//   })
-//}
-
-handleResponse = event => {
-  console.log("Response being handled")
+renderPetDisplayContainer() {
   if (this.state.userResponse === 0) {
-    return " Make a search!"
+    return (
+      <div>
+        Make a search!
+      </div>
+     );
   }
-
+  else if (this.state.userResponse['error'] !== undefined) {
+    return (
+      <div>
+        Sorry no search results matched that criteria! Please try another search!
+      </div>
+    );
+  }
+  else {
+     return ( 
+                <PetDisplayContainer
+                  userResponse={this.state.userResponse}
+                />
+  )
+  }
 }
-
   render() {
     if (this.state.userResponse['pets'] !== undefined){
     console.log('pets:' + this.state.userResponse['pets'])
@@ -70,9 +64,7 @@ handleResponse = event => {
                 />
               </Col>
               <Col md="9">
-                <PetDisplayContainer
-                  userResponse={this.state.userResponse}
-                />
+                {this.renderPetDisplayContainer()}
               </Col>
             </Row>
           </Container>

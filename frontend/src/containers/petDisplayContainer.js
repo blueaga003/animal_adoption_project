@@ -6,38 +6,40 @@ class PetDisplayContainer extends Component {
     super(props);
 
     this.state = {
-      userResponse: 0,
+      data: [],
   }
-  this.handleResonse=this.handleResponse.bind(this)
+  this.renderList=this.renderList.bind(this)
 }
 
-handleResponse = event => {
+renderList = event => {
+
   console.log("Response being handled")
-  console.log("userResponse_pets: " + this.props.userResponse['pets'])
-  console.log("userResponse_0: " + this.props.userResponse)
-  if (this.props.userResponse === 0) {
-    return " Make a search!"
-  } 
-  else if (this.props.userResponse['error'] !== undefined) {
-      return "Sorry! No results matched that criteria!Try a different search!"
+  let dataList = []
+  console.log("PETS")
+  console.log(this.props.userResponse.pets)
+  for (let object of this.props.userResponse.pets) {
+       object = JSON.parse(object)
+       dataList.push(
+          <DisplayPet
+            key={object.animal_id}
+            name={object.name}
+            species={object.species}
+            breed={object.breed}
+            gender={object.gender}
+            age={object.age}
+          />)
   }
-    else {
-    return (
-      <div className='petDisplay' >
-        <DisplayPet
-          name={this.props.userResponse['pets']}
-          options={this.props.userResponse['pets']}
-        />
-      </div>
-    );
-  }
+     console.log("DATALIST")
+     console.log(dataList)
+     return dataList
 }
-// set userResponse -> handleDataBind to pass it to the "homepage" component
+
+
   render() {
-  
   return (
     <div className="petDisplayResponse">
-      {this.handleResponse()}
+      {this.renderList()}
+      {this.state.data}
     </div>
   );
   }
