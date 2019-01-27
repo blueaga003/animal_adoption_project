@@ -40,19 +40,13 @@ export default class LoginContainer extends Component {
       }
     }).then(response => response.json())
       .then(responseAnswer  =>{
-        console.log("ResponseAnswer " + responseAnswer['error'])
         this.setState({userResponse: responseAnswer});
-        console.log("UserResponse " + this.state.userResponse) //TODO: Remove
 
       //Add catch for failure
     })
   }
   handleResponse = event => {
-    console.log("HandleResponse:UserResponse : " + this.state.userResponse)
-    console.log("HandleResponse:userResponse['error'] :" +  this.state.userResponse['error'])
     if (this.state.userResponse['user'] != null) {
-      console.log('true')
-      console.log(typeof("Typeof: "+ this.state.userResponse['user']))
       return this.props.history.push("/petSearch")
     }
     else if (this.state.userResponse['error'] != null){
@@ -60,7 +54,6 @@ export default class LoginContainer extends Component {
     }
   }
   render() {
-    console.log("data : " + this.state.data) // TODO: Remove
     return (
     <Login 
       email={this.state.email}
