@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import Greeting from '../components/greeting/greeting'
+import '../components/petDisplay.css'
 //import Map from '../components/map/map';
 import SearchFormContainer from './searchForm/searchFormContainer';
 import PetDisplayContainer from './petDisplayContainer'
@@ -21,8 +22,6 @@ class DisplayResults extends Component {
 
 handleDataBind = (dataFromStates) => {
   this.setState(dataFromStates)
-  console.log("Does something")
-  console.log("FORREAL!")
 }
 
 renderPetDisplayContainer() {
@@ -41,7 +40,7 @@ renderPetDisplayContainer() {
     );
   }
   else {
-     return ( 
+     return (
                 <PetDisplayContainer
                   userResponse={this.state.userResponse}
                 />

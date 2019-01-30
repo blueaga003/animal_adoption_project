@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { DisplayPet } from '../components/petDisplay'
-
+import { Row } from 'reactstrap'
 class PetDisplayContainer extends Component {
   constructor(props) {
     super(props);
@@ -38,7 +38,8 @@ renderList = event => {
   render() {
   return (
     <div className="petDisplayResponse">
-      {this.renderList()}
+      <h3> Results </h3>
+      <Row className="petRow"> {this.renderList()}</Row>
       {this.state.data}
     </div>
   );
