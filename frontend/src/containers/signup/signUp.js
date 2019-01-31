@@ -5,10 +5,6 @@ import './signUp.css'
 
 class SignUp extends Component {
 
- // constructor(props) {
- //   super(props)
- // };
-
   render() { 
     return (
       <div className='SignUp'>
