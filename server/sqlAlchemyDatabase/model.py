@@ -128,7 +128,7 @@ class Pet(db.Model):
     age = db.Column(db.String(45), nullable=False, default="Unknown",)
     grooming_needs = db.Column(db.String(45), nullable=False, default="Unknown")
     adoption_status = db.Column(db.String(1), nullable=False, default="Y")
-    url = db.Column(db.String(200),nullable=True,)
+    url = db.Column(db.String(250),nullable=True,)
     def toString(self):
         """ Show info about pets."""
 
@@ -138,7 +138,8 @@ class Pet(db.Model):
                 'active_levels': self.active_levels,
                 'age': self.age,
                 'breed': self.breed,
-                'species': self.species
+                'species': self.species,
+                'url':self.url
                })
 
     def __repr__(self):
@@ -146,10 +147,26 @@ class Pet(db.Model):
 
         return json.dumps({'animal_id': self.animal_id, 
                 'name': self.name,
-                'gender': self.gender
+                'gender': self.gender,
+                'url': self.url
                })
        # return dict("{" + "\'animal_id\': {}, \'name\' : {}".format(self.animal_id, self.name)+ "}")
        # return "animal_id={}, name={}, species={}, breed={}, active_levels={},gender={}, age={}, grooming_needs={}".format(self.animal_id, self.name, self.species, self.breed, self.active_levels, self.gender, self.age, self.grooming_needs)
+
+    def print_url():
+        json_data = open("pet_data.json")
+        all_new_pets = json.load(json_data)
+        i = 0
+        pets = []
+        for pet in all_new_pets["pets"]:
+            while i < 5:
+                entry = Pet(
+                        url = pet["pictures"][0]['originalUrl'])
+                pets.append(entry)
+                i += 1
+
+        json_data.close()
+        return pets
 
     def update_pets():
         """Adds new pet data to database."""
@@ -157,29 +174,41 @@ class Pet(db.Model):
         json_data = open("pet_data.json")
         all_new_pets = json.load(json_data)
         new_pets = []
-        i = 0
+      #  i = 0
         for pet in all_new_pets["pets"]:
-            new_entry = Pet(animal_id = pet["animalID"], name = pet["name"].title(), species = pet["species"].lower(), gender=pet['sex'].lower(), breed = pet["primaryBreed"].lower(), active_levels = pet["activityLevel"].lower(), age = pet["age"].lower(), grooming_needs = pet["groomingNeeds"].lower(), url = "NA")
-            # Cleaning data
-            # Does not include pet if the species is not listed
-            if new_entry.species == "":
-                continue
-            if new_entry.breed == "":
-                new_entry.breed = "unknown"
-            # Does not include pet if the name has more than two spaces or certain symbols (data cleaning)
-            if (new_entry.name.count(" ")) > 1:
-                continue
-            #if re.search("*-(", new_entry.name):
-            #       continue
-            if new_entry.active_levels =="":
-                new_entry.active_levels = "unknown"
-            if new_entry.age =="":
-                new_entry.age = "unknown"
-            if new_entry.grooming_needs =="":
-                new_entry.grooming_needs = "unknown"
+            try:
+                    new_entry = Pet(
+                                animal_id = pet["animalID"],
+                                name = pet["name"].title(),
+                                species = pet["species"].lower(),
+                                gender=pet['sex'].lower(),
+                                breed = pet["primaryBreed"].lower(),
+                                active_levels = pet["activityLevel"].lower(), 
+                                age = pet["age"].lower(),
+                                grooming_needs = pet["groomingNeeds"].lower(),
+                                url = pet["pictures"][0]['originalUrl'])
+                    # Cleaning data
+                    # Does not include pet if the species is not listed
+                    if new_entry.species == "":
+                        continue
+                    if new_entry.breed == "":
+                        new_entry.breed = "unknown"
+                    # Does not include pet if the name has more than two spaces or certain symbols (data cleaning)
+                    if (new_entry.name.count(" ")) > 1:
+                        continue
+                    #if re.search("*-(", new_entry.name):
+                    #       continue
+                    if new_entry.active_levels =="":
+                        new_entry.active_levels = "unknown"
+                    if new_entry.age =="":
+                        new_entry.age = "unknown"
+                    if new_entry.grooming_needs =="":
+                        new_entry.grooming_needs = "unknown"
 
-            new_pets.append(new_entry)
-            
+                    new_pets.append(new_entry)
+            except IndexError:
+                continue
+
         db.session.add_all(new_pets)
         db.session.commit()
         json_data.close()
