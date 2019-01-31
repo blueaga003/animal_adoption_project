@@ -39,6 +39,9 @@ renderPetDisplayContainer() {
       </div>
     );
   }
+  else if (this.state.userResponse['msg'] !== undefined) {
+    this.props.history.push('/login')
+  }
   else {
      return (
                 <PetDisplayContainer
