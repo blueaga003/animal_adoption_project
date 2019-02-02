@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { CheckBox } from '../../components/check_box/checkBox';
 import { DropDown } from '../../components/drop_down/dropDown';
+import './animalPreferences.css';
 
 class AnimalPreferences extends Component {
   render() {
