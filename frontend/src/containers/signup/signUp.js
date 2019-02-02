@@ -46,13 +46,14 @@ class SignUp extends Component {
              handleDataBind={this.props.handleDataBind}
           />
           <Button
+            className="Button"
             onClick={this.props.handleSubmit}
             block
             bsSize="large"
             disabled={!this.props.validateForm()}
             type="submit"
           >
-            Signup
+            Register
           </Button>
         </form> 
         <div className="UserActivity">

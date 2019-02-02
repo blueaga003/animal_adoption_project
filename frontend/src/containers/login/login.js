@@ -27,6 +27,7 @@ export default class Login extends Component {
             />
           </FormGroup>
           <Button
+            className="Button"
             block
             bsSize="large"
             disabled={!this.props.validateForm()}
