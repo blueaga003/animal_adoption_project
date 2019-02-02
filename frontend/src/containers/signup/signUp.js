@@ -9,7 +9,7 @@ class SignUp extends Component {
     return (
       <div className='SignUp'>
         <form onSubmit={this.props.handleSubmit}>
-          <FormGroup controlId="email" bsSize="large">
+          <FormGroup controlId="email" bsSize="large" className="UserEntry">
             <ControlLabel>Email</ControlLabel>
             <FormControl
               autoFocus
@@ -18,7 +18,7 @@ class SignUp extends Component {
               onChange={this.props.handleChange}
             />
           </FormGroup>
-          <FormGroup controlId="password" bsSize="large">
+          <FormGroup controlId="password" bsSize="large" className="UserEntry">
             <ControlLabel>Password</ControlLabel>
             <FormControl
               value={this.props.password}
@@ -26,7 +26,7 @@ class SignUp extends Component {
               type="password"
             />
           </FormGroup>
-          <FormGroup controlId="firstName" bsSize="large">
+          <FormGroup controlId="firstName" bsSize="large" className='UserEntry'>
             <ControlLabel>First Name</ControlLabel>
             <FormControl
               value={this.props.firstName}
@@ -34,7 +34,7 @@ class SignUp extends Component {
               type="firstName"
             />
           </FormGroup>
-          <FormGroup controlId="lastName" bsSize="large">
+          <FormGroup controlId="lastName" bsSize="large" className='UserEntry'>
             <ControlLabel>Last Name</ControlLabel>
             <FormControl
               value={this.props.lastName}

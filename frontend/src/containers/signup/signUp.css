@@ -1,10 +1,19 @@
 @media all and (min-width: 480px) {
   .SignUp {
-    padding: 60px 0;
+    padding: 60px;
   }
 
   .SignUp form {
     margin: 0 auto;
     max-width: 320px;
+  }
+  .UserEntry {
+    font-family: 'Indie Flower', cursive;
+    font-weight: 500;
+  } 
+  .UserActivity {
+    color: red;
+    font-size: 40px;
+    text-align: center;
   }
 }
