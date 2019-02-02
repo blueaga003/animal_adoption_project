@@ -1,6 +1,6 @@
 .petRow {
-  background-color: #f1f1f1;
   max-width: 1000px;
+  max-height: 300px;
 }
 
 .petSearchPage {
@@ -16,6 +16,19 @@
   width: 25%;
 }
 
-.petTable {
+.petImage{
+  height: 200px;
+    
+}
+img {
+  height: auto;
+  width: 80%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   
+}
+
+h4 {
+  font-family: 'Indie Flower', cursive;
 }
