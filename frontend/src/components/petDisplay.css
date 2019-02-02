@@ -1,5 +1,21 @@
 .petRow {
   background-color: #f1f1f1;
-  max-width: 700px;
+  max-width: 1000px;
 }
 
+.petSearchPage {
+  height: 1200px;
+  width: 100%;
+}
+
+.searchContainer {
+ max-width: 90%;
+}
+
+.display-pet {
+  width: 25%;
+}
+
+.petTable {
+  
+}
