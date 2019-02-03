@@ -1,5 +1,10 @@
 .App {
+  background-image: url("foggy_birds.png") no-repeat center center;
 }
+
+.App {
+}
+
 
 .App-link {
   color: #61dafb;
