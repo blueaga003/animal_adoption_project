@@ -27,6 +27,7 @@ renderList = event => {
             breed={object.breed}
             gender={object.gender}
             age={object.age}
+            url={object.url}
           />)
   }
      console.log("DATALIST")
