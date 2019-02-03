@@ -17,7 +17,7 @@
 }
 
 .petImage{
-  height: 200px;
+  height: 300px;
     
 }
 img {
@@ -26,9 +26,35 @@ img {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom:auto;
   
 }
 
-h4 {
-  font-family: 'Indie Flower', cursive;
+.animalName {
+  font-family: 'Love Ya Like A Sister', cursive;
+  font-weight: 600;
+  text-align: right;
+}
+
+.searchPrompt {
+  text-align: center;
+  font-family: 'Love Ya Like A Sister';
+  font-size: 80px;
+  vertical-align: middle;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  line-height: 1.5em
+}
+
+.searchTryAgain {
+  text-align: center;
+  font-family: 'Love Ya Like A Sister';
+  font-size: 40px;
+  vertical-align: middle;
+  line-height: 1.5em;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+
 }

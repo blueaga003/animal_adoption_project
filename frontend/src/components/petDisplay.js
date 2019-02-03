@@ -2,16 +2,16 @@ import React  from 'react';
 
 const DisplayPet = (props) => {
   return (
-    <div className="display-pet">
-            <div className="petTable">
-                <div className='petImage' height="300px" width="300px">
-                <img src={props.url} alt="meep"/> 
+    <div className='display-pet'>
+            <div className='petTable'>
+                <div className='petImage' height='300px' width='300px'>
+                <img src={props.url} alt='meep'/> 
                 </div>
             <table>
               <tbody>
               <tr>
                 <th>
-                <h4>{props.name}</h4>
+                <h4 className='animalName'>{props.name}</h4>
                 </th>
               </tr>
               <tr>
