@@ -12,6 +12,9 @@ class NavBar extends Component {
           <NavItem>
             <NavLink href="/profile">Profile</NavLink>
           </NavItem>
+          <NavItem>
+            <NavLink href="/login">Log Out</NavLink>
+          </NavItem>
         </Nav>
       );
     }
