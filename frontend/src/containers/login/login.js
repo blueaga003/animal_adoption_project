@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Form, Button, FormGroup, FormControl} from "react-bootstrap";
 import "./login.css";
 import "../signup/signUp.css";
 
@@ -9,8 +9,8 @@ export default class Login extends Component {
     return (
       <div className="Login">
         <form onSubmit={this.props.handleSubmit}>
-          <FormGroup controlId="email" bsSize="large" className='UserEntry'>
-            <ControlLabel>Email</ControlLabel>
+          <FormGroup controlId="email" bssize="large" className='UserEntry'>
+           <Form.Label>Email</Form.Label>
             <FormControl
               autoFocus
               type="email"
@@ -18,8 +18,8 @@ export default class Login extends Component {
               onChange={this.props.handleChange}
             />
           </FormGroup>
-          <FormGroup controlId="password" bsSize="large" className='UserEntry'>
-            <ControlLabel>Password</ControlLabel>
+          <FormGroup controlId="password" bssize="large" className='UserEntry'>
+           <Form.Label>Password</Form.Label>
             <FormControl
               value={this.props.password}
               onChange={this.props.handleChange}
@@ -29,7 +29,7 @@ export default class Login extends Component {
           <Button
             className="Button"
             block
-            bsSize="large"
+            bssize="large"
             disabled={!this.props.validateForm()}
             type="submit"
           >

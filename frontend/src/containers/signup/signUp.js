@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Form, Button, FormGroup, FormControl} from 'react-bootstrap';
 import AnimalPreferencesContainer from '../animalPreferences/animalPreferencesContainer';
 import './signUp.css'
 
@@ -10,7 +10,7 @@ class SignUp extends Component {
       <div className='SignUp'>
         <form onSubmit={this.props.handleSubmit}>
           <FormGroup controlId="email" bsSize="large" className="UserEntry">
-            <ControlLabel>Email</ControlLabel>
+            <Form.Label>Email</Form.Label>
             <FormControl
               autoFocus
               type="email"
@@ -19,7 +19,7 @@ class SignUp extends Component {
             />
           </FormGroup>
           <FormGroup controlId="password" bsSize="large" className="UserEntry">
-            <ControlLabel>Password</ControlLabel>
+            <Form.Label>Password</Form.Label>
             <FormControl
               value={this.props.password}
               onChange={this.props.handleChange}
@@ -27,7 +27,7 @@ class SignUp extends Component {
             />
           </FormGroup>
           <FormGroup controlId="firstName" bsSize="large" className='UserEntry'>
-            <ControlLabel>First Name</ControlLabel>
+            <Form.Label>First Name</Form.Label>
             <FormControl
               value={this.props.firstName}
               onChange={this.props.handleChange}
@@ -35,7 +35,7 @@ class SignUp extends Component {
             />
           </FormGroup>
           <FormGroup controlId="lastName" bsSize="large" className='UserEntry'>
-            <ControlLabel>Last Name</ControlLabel>
+            <Form.Label>Last Name</Form.Label>
             <FormControl
               value={this.props.lastName}
               onChange={this.props.handleChange}
