@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import NavBar from './components/nav_bar/navBar';
-import HomePage from './containers/homepageContainer';
+//import HomePage from './containers/homepageContainer';
 import LogInContainer from './containers/login/logInContainer';
 import SignUpContainer from './containers/signup/signUpContainer';
 import DisplayResults from './containers/resultsContainer';
@@ -14,28 +14,37 @@ class App extends Component {
     this.state = {
       loggedIn: false
     }
-  }
 
-checkIfLoggedIn = event => {
+this.checkIfLoggedIn = this.checkIfLoggedIn.bind(this)
+this.renderFunction = this.renderFunction.bind(this)
+}
+
+// Pass to Sign Up Container
+checkIfLoggedIn = (props) => {
   let accessToken = localStorage.getItem('Token')
-  console.log("AccessToken")
+  console.log("AccessToken") 
+  this.setState(props)
   console.log(accessToken)
   if (accessToken !== null && this.state.loggedIn === false) {
     this.setState({loggedIn: true})
   }
 }
+
+ renderFunction(props) {
+  return <SignUpContainer checkIfLoggedIn={this.checkIfLoggedIn} /> 
+}
+componentDidMount(){this.checkIfLoggedIn()}
   render() {
     return (
       <Router>
         <div className='App'>
           <header className='App-header'>
-            {this.checkIfLoggedIn()}
             <NavBar loggedIn={this.state.loggedIn}/>
           </header>
-       <Route exact={true} path='/' component = { HomePage } />
+       <Route exact={true} path='/' component = { SignUpContainer } />
        <Route path='/petSearch' component = { DisplayResults } />
+       <Route path='/register' component = {SignUpContainer} />
        <Route path='/login' component = { LogInContainer } />
-       <Route path='/register' component = { SignUpContainer } />
        </div>
      </Router>
     );
@@ -43,3 +52,6 @@ checkIfLoggedIn = event => {
 }
 
 export default App;
+
+
+       //<Route path='/register' component = {this.renderFunction} />
