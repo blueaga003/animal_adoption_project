@@ -12,8 +12,9 @@
     font-weight: 500;
   } 
   .UserActivity {
-    color: red;
-    font-size: 40px;
+    font-family: 'Gloria Hallelujah', cursive;
+    color: #E64F6D; 
+    font-size: 35px;
     text-align: center;
   }
 
