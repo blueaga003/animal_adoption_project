@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import Greeting from '../components/greeting/greeting'
 import '../components/petDisplay.css'
-//import Map from '../components/map/map';
 import SearchFormContainer from './searchForm/searchFormContainer';
 import PetDisplayContainer from './petDisplayContainer'
 
@@ -12,7 +11,8 @@ class DisplayResults extends Component {
     super(props);
 
     this.state = {
-      userResponse: 0
+      userResponse: 0,
+      loggedIn: true,
     };
 
   this.handleDataBind = this.handleDataBind.bind(this)
@@ -25,17 +25,18 @@ handleDataBind = (dataFromStates) => {
 }
 
 renderPetDisplayContainer() {
+  //this.props.handleLoginState({loggedIn: true});
   if (this.state.userResponse === 0) {
     return (
-      <div>
+      <div className='searchPrompt'>
         Make a search!
       </div>
      );
   }
   else if (this.state.userResponse['error'] !== undefined) {
     return (
-      <div>
-        Sorry no search results matched that criteria! Please try another search!
+      <div className='searchTryAgain'>
+        Sorry, no search results matched that criteria! Please try another search!
       </div>
     );
   }
@@ -56,9 +57,9 @@ renderPetDisplayContainer() {
 }
     console.log(this.state.userResponse)
     return (
-        <div style={{height: '1200px', width: '1200px'}}>
+        <div className='petSearchPage'>
           <Greeting/>
-          <Container>
+          <Container style={{maxWidth:'90%'}}>
             <Row>
               <Col md="3">
                 <SearchFormContainer
