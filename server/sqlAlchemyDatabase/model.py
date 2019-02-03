@@ -139,7 +139,7 @@ class Pet(db.Model):
                 'age': self.age,
                 'breed': self.breed,
                 'species': self.species,
-                'url':self.url
+                'url': self.url
                })
 
     def __repr__(self):
@@ -150,8 +150,6 @@ class Pet(db.Model):
                 'gender': self.gender,
                 'url': self.url
                })
-       # return dict("{" + "\'animal_id\': {}, \'name\' : {}".format(self.animal_id, self.name)+ "}")
-       # return "animal_id={}, name={}, species={}, breed={}, active_levels={},gender={}, age={}, grooming_needs={}".format(self.animal_id, self.name, self.species, self.breed, self.active_levels, self.gender, self.age, self.grooming_needs)
 
     def print_url():
         json_data = open("pet_data.json")
@@ -161,7 +159,7 @@ class Pet(db.Model):
         for pet in all_new_pets["pets"]:
             while i < 5:
                 entry = Pet(
-                        url = pet["pictures"][0]['originalUrl'])
+                        url = pet['pictures'][0]['originalUrl'])
                 pets.append(entry)
                 i += 1
 

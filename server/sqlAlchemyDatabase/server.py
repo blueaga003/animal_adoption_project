@@ -37,11 +37,10 @@ def register():
             db.session.commit()
             return jsonify({'user':data['email'], 'access_token': access_token, 'refresh_token': refresh_token})
         else:
-            user_info={'error': 'User already exists'}
+            user_info={'error': 'This email is already in use. Please try another one!'}
             return jsonify(user_info)
 
 @app.route('/login', methods = ['GET', 'POST'])
-#@jwt_required
 def login():
     """User login."""
     if request.method == 'POST':
@@ -53,7 +52,7 @@ def login():
         if user_query == None or user_query.password != data['password']:
             return jsonify({'error':['Username or password is incorrect']})
         user_info = {'user':data['email']}
-        return jsonify(user_info)
+        return jsonify({'user':data['email'], 'access_token': access_token, 'refresh_token': refresh_token})
 
 #put in session as logged in
         print("success login")
