@@ -16,6 +16,7 @@ class SignUpContainer extends Component {
       animalActivityLevels: [],
       gender: [],
       userResponse: 0,
+      validateErrorMessage: "",
     
     };
 
@@ -67,7 +68,7 @@ class SignUpContainer extends Component {
     //console.log(this.props)
   };
 
-  handleResponse = event => {
+  handleResponse(event) {
    
    if(this.state.userResponse['user'] != null) {
       this.setState({authCookie : this.state.userResponse['access_token']})
@@ -75,6 +76,7 @@ class SignUpContainer extends Component {
       //return "The user " + this.state.userResponse['user'] + " has been created!"
       // return <Redirect to="/" />
       this.props.history.push("/petSearch")
+      window.location.href="/petSearch"
     }
    else if (this.state.userResponse['error'] != null) {
 
