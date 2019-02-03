@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { CheckBox } from '../../components/check_box/checkBox';
 import { DropDown } from '../../components/drop_down/dropDown';
 import { Button } from "react-bootstrap";
+import './searchForm.css';
 
 class SearchFormContainer extends Component {
   constructor(props) {
@@ -106,6 +107,13 @@ handleFormSubmit(event) {
        console.log('userResponse: ' + this.state.userResponse);
        console.log(this.state.userResponse)
     })
+   // .catch(error => {
+   //   console.log(error)
+   //   console.log("HISTORY")
+   //   this.props.handleDataBind({userResponse: 'Unauthenticated'})
+   //   console.log(this.props.history)
+   //   this.props.history.push('/login')
+    //  })
 };
 
 // set userResponse -> handleDataBind to pass it to the "homepage" component
@@ -113,7 +121,7 @@ handleFormSubmit(event) {
 
     return (
       <form className='animalSearchWants' onSubmit={this.handleFormSubmit}>
-        <h2> Search Preferances </h2>
+        <h2 className='searchTitle'> Search Preferances </h2>
         <CheckBox title={'GENDER'}
                   name={'gender'}
                   options={this.state.genderOptions}
@@ -137,6 +145,7 @@ handleFormSubmit(event) {
                handleChange = {this.handleInput}
                />
         <Button
+          className='button'
           block
           bsSize="large"
           type="submit"
