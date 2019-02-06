@@ -14,26 +14,32 @@ class App extends Component {
     this.state = {
       loggedIn: false
     }
-
-this.checkIfLoggedIn = this.checkIfLoggedIn.bind(this)
-this.renderFunction = this.renderFunction.bind(this)
 }
 
 // Pass to Sign Up Container
+//checkIfLoggedIn = (props) => {
 checkIfLoggedIn = (props) => {
+//===TEMP===
+  alert("CALLED FROM SIGN UP CONTAINER")
+//===TEMP===
   let accessToken = localStorage.getItem('Token')
   console.log("AccessToken") 
-  this.setState(props)
-  console.log(accessToken)
-  if (accessToken !== null && this.state.loggedIn === false) {
-    this.setState({loggedIn: true})
+  this.setState({loggedIn:true})
+//  console.log(accessToken)
+//  if (accessToken !== null && this.state.loggedIn === false) {
+//    this.setState({loggedIn: true})
   }
-}
+
 
  renderFunction(props) {
   return <SignUpContainer checkIfLoggedIn={this.checkIfLoggedIn} /> 
 }
-componentDidMount(){this.checkIfLoggedIn()}
+//componentDidMount(){this.checkIfLoggedIn()}
+componentDidMount() {
+  // === TEMP ===
+ // this.checkIfLoggedIn()
+  // === TEMP ===
+}
   render() {
     return (
       <Router>
@@ -43,7 +49,15 @@ componentDidMount(){this.checkIfLoggedIn()}
           </header>
        <Route exact={true} path='/' component = { SignUpContainer } />
        <Route path='/petSearch' component = { DisplayResults } />
-       <Route path='/register' component = {SignUpContainer} />
+       <Route
+         path='/register'
+         render = {(props) => (
+           <SignUpContainer
+             {...props}
+             checkIfLoggedIn={this.checkIfLoggedIn}
+           />
+         )}
+      />
        <Route path='/login' component = { LogInContainer } />
        </div>
      </Router>
@@ -54,4 +68,5 @@ componentDidMount(){this.checkIfLoggedIn()}
 export default App;
 
 
+       //{/*<Route path='/register' component = {SignUpContainer} />*/}
        //<Route path='/register' component = {this.renderFunction} />
