@@ -57,7 +57,7 @@ class SignUp extends Component {
           </Button>
         </form> 
         <div className="UserActivity">
-          {this.props.handleResponse()}
+            {this.props.validateErrorMessage}
         </div>
       </div>
     );

@@ -86,7 +86,9 @@ class SignUpContainer extends Component {
     }
    else if (this.state.userResponse['error'] != null) {
     // update validateErrorMessage
-    return this.state.userResponse['error']
+    
+    this.setState({validateErrorMessage: this.state.userResponse['error']})
+    return this.state.validateErrorMessage
     }
   }
 //if this.state.data (wait, from constructor, provide feedback), conditional render
