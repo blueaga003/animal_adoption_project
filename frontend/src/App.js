@@ -58,7 +58,15 @@ componentDidMount() {
            />
          )}
       />
-       <Route path='/login' component = { LogInContainer } />
+       <Route
+         path='/login'
+         render = {(props) => (
+           <LogInContainer
+             {...props}
+             checkIfLoggedIn={this.checkIfLoggedIn}
+           />
+         )}
+      />
        </div>
      </Router>
     );

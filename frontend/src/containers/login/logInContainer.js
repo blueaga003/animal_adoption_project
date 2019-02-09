@@ -47,6 +47,7 @@ export default class LoginContainer extends Component {
   }
   handleResponse = event => {
     if (this.state.userResponse['user'] != null) {
+      this.props.checkIfLoggedIn()
       return this.props.history.push("/petSearch")
     }
     else if (this.state.userResponse['error'] != null){

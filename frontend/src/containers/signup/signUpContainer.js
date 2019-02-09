@@ -6,7 +6,8 @@ import SignUp from './signUp';
 class SignUpContainer extends Component {
   constructor(props) {
     super(props);
-
+    console.log("CONSTRUCTOR PROPS")
+    console.log(props)
     this.state = {
       email: "",
       password: "",
@@ -44,6 +45,7 @@ class SignUpContainer extends Component {
   } //Do I need a comma after this?
 
   handleSubmit(event) {
+    console.log(this.props)
     event.preventDefault();
     fetch('http://localhost:5000/register', {
       credentials:'include',
@@ -57,6 +59,7 @@ class SignUpContainer extends Component {
       .then(responseAnswer => {
          this.setState({userResponse: responseAnswer});
           localStorage.setItem("Token", responseAnswer['access_token'])
+          this.handleResponse()
      //     console.log(this.state.userResponse) //TODO: Remove
     
       //Add catch for failure
@@ -69,17 +72,20 @@ class SignUpContainer extends Component {
   };
 
   handleResponse(event) {
-   
+    
    if(this.state.userResponse['user'] != null) {
       this.setState({authCookie : this.state.userResponse['access_token']})
       // Change path
       //return "The user " + this.state.userResponse['user'] + " has been created!"
       // return <Redirect to="/" />
+      console.log(this.props)
+      this.props.checkIfLoggedIn()
+      
       this.props.history.push("/petSearch")
-      window.location.href="/petSearch"
+      //window.location.href="/petSearch"
     }
    else if (this.state.userResponse['error'] != null) {
-
+    // update validateErrorMessage
     return this.state.userResponse['error']
     }
   }
@@ -95,6 +101,7 @@ class SignUpContainer extends Component {
         lastName={this.state.lastName}
         species={this.state.species}
         animalActivityLevels={this.state.animalActivityLevels}
+        validateErrorMessage={this.state.validateErrorMessage}
         gender={this.state.gender}
         validateForm={this.validateForm}
         handleChange={this.handleChange}
