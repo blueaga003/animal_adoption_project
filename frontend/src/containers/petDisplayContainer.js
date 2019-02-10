@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { DisplayPet } from '../components/petDisplay'
 import { Row } from 'reactstrap'
+import './petDisplayContainer.css'
 class PetDisplayContainer extends Component {
   constructor(props) {
     super(props);
