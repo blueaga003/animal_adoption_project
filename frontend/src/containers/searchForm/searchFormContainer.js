@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { CheckBox } from '../../components/check_box/checkBox';
-import { DropDown } from '../../components/drop_down/dropDown';
+import React, { Component } from "react";
+import { CheckBox } from "../../components/check_box/checkBox";
+import { DropDown } from "../../components/drop_down/dropDown";
 import { Button } from "react-bootstrap";
-import './searchForm.css';
+import "./searchForm.css";
 
 class SearchFormContainer extends Component {
   constructor(props) {
@@ -10,19 +10,19 @@ class SearchFormContainer extends Component {
 
     this.state = {
       newUser: {
-        species: '',
+        species: "",
         animalActivityLevels: [],
         gender: [],
         userResponse: 0,
-        defaultSpecies: '',
-        defaultSpeciesOptions: ['dog', 'cat', 'horse', 'unknown'],
-        defaultActivityLevels: ['not active', 'slightly active', 'moderately active', 'highly active', 'unknown'],
-        defaultGender: ['male', 'female', 'unknown'],
+        defaultSpecies: "",
+        defaultSpeciesOptions: ["dog", "cat", "horse", "unknown"],
+        defaultActivityLevels: ["not active", "slightly active", "moderately active", "highly active", "unknown"],
+        defaultGender: ["male", "female", "unknown"],
       },
 
-     genderOptions: ['male', 'female'],
-     speciesOptions: ['dog', 'cat', 'horse'],
-     activityLevels: ['not active', 'slightly active', 'moderately active', 'highly active'],
+     genderOptions: ["male", "female"],
+     speciesOptions: ["dog", "cat", "horse"],
+     activityLevels: ["not active", "slightly active", "moderately active", "highly active"],
     //dogBreedOptions: []
   }
 
@@ -77,77 +77,62 @@ handleInput(e) {
       }), () => console.log(this.state.newUser))
 }
 handleFormSubmit(event) {
-  let accessToken = localStorage.getItem('Token');
-  let backendInfo = {}
+  let accessToken = localStorage.getItem("Token");
+  let backendInfo = {};
   if ((this.state.newUser.gender.length === 0) && (this.state.newUser.species.length === 0) && (this.state.newUser.animalActivityLevels.length === 0)) {
-    backendInfo.gender = this.state.newUser.defaultGender
-    backendInfo.species = this.state.newUser.defaultSpecies
-    backendInfo.activityLevels = this.state.newUser.defaultActivityLevels
+    backendInfo.gender = this.state.newUser.defaultGender;
+    backendInfo.species = this.state.newUser.defaultSpecies;
+    backendInfo.activityLevels = this.state.newUser.defaultActivityLevels;
   } else {
-    backendInfo.gender = this.state.newUser.gender
-    backendInfo.species = this.state.newUser.species
-    backendInfo.activityLevels = this.state.newUser.animalActivityLevels
+    backendInfo.gender = this.state.newUser.gender;
+    backendInfo.species = this.state.newUser.species;
+    backendInfo.activityLevels = this.state.newUser.animalActivityLevels;
   }
-  // set default in state
   event.preventDefault();
-  fetch('http://localhost:5000/petSearch', {
-    credentials:'include',
-    method:'POST',
+  fetch("http://localhost:5000/petSearch", {
+    credentials:"include",
+    method:"POST",
     body:JSON.stringify(backendInfo),
     headers: {
-      'Accept':'application/json',
-      'Content-Type':'application/json',
-      'Authorization':'Bearer ' + accessToken
+      "Accept":"application/json",
+      "Content-Type":"application/json",
+      "Authorization":"Bearer " + accessToken
     }
   }).then(response => response.json())
-    // response = JSON.parse(response)
     .then(responseAnswer => {
        this.setState({userResponse: responseAnswer});
        this.props.handleDataBind({userResponse: responseAnswer});
-       console.log('userResponse: ' + this.state.userResponse);
-       console.log(this.state.userResponse)
     })
-   // .catch(error => {
-   //   console.log(error)
-   //   console.log("HISTORY")
-   //   this.props.handleDataBind({userResponse: 'Unauthenticated'})
-   //   console.log(this.props.history)
-   //   this.props.history.push('/login')
-    //  })
 };
 
-// set userResponse -> handleDataBind to pass it to the "homepage" component
   render() {
-
     return (
-      <form className='animalSearchWants' onSubmit={this.handleFormSubmit}>
-        <h2 className='searchTitle'> Search Preferances </h2>
-        <CheckBox title={'GENDER'}
-                  name={'gender'}
+      <form className="animalSearchWants" onSubmit={this.handleFormSubmit}>
+        <h2 className="searchTitle"> Search Preferances </h2>
+        <CheckBox title={"GENDER"}
+                  name={"gender"}
                   options={this.state.genderOptions}
                   selectedOptions={this.state.newUser.gender}
                   value={this.state.value}
                   handleChange={this.handleGenderCheckBox}
                   />
-        <CheckBox title={'ACTIVITY LEVEL'}
-                  name={'animalActivityLevels'}
+        <CheckBox title={"ACTIVITY LEVEL"}
+                  name={"animalActivityLevels"}
                   options={this.state.activityLevels}
                   selectedOptions={this.state.newUser.animalActivityLevels}
                   value={this.state.value}
                   handleChange={this.handleActivityLevelsCheckBox}
                   />
-
-        <DropDown title={'SPECIES'}
-               name={'species'}
+        <DropDown title={"SPECIES"}
+               name={"species"}
                options = {this.state.speciesOptions} 
                value = {this.state.newUser.species}
-               placeholder = {'Select Species'}
+               placeholder = {"Select Species"}
                handleChange = {this.handleInput}
                />
         <Button
-          className='button'
+          className="button"
           block
-          bsSize="large"
           type="submit"
         >
           Search

@@ -4,8 +4,6 @@ import './navBar.css'
 class NavBar extends Component {
 
   renderNavBar = (event) => {
-    console.log("LoggedIn Props")
-    console.log(this.props.loggedIn)
     if (this.props.loggedIn === true) {
       return (
         <Nav className="ml-auto" navbar>

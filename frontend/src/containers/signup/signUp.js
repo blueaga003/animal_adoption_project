@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { Form, Button, FormGroup, FormControl} from 'react-bootstrap';
-import AnimalPreferencesContainer from '../animalPreferences/animalPreferencesContainer';
-import './signUp.css'
+import React, { Component } from "react";
+import { Form, Button, FormGroup, FormControl} from "react-bootstrap";
+import AnimalPreferencesContainer from "../animalPreferences/animalPreferencesContainer";
+import "./signUp.css"
 
 class SignUp extends Component {
 
   render() { 
     return (
-      <div className='SignUp'>
+      <div className="SignUp">
         <form onSubmit={this.props.handleSubmit}>
-          <FormGroup controlId="email" bsSize="large" className="UserEntry">
+          <FormGroup controlId="email" className="UserEntry">
             <Form.Label>Email</Form.Label>
             <FormControl
               autoFocus
@@ -18,7 +18,7 @@ class SignUp extends Component {
               onChange={this.props.handleChange}
             />
           </FormGroup>
-          <FormGroup controlId="password" bsSize="large" className="UserEntry">
+          <FormGroup controlId="password" className="UserEntry">
             <Form.Label>Password</Form.Label>
             <FormControl
               value={this.props.password}
@@ -26,7 +26,7 @@ class SignUp extends Component {
               type="password"
             />
           </FormGroup>
-          <FormGroup controlId="firstName" bsSize="large" className='UserEntry'>
+          <FormGroup controlId="firstName" className="UserEntry">
             <Form.Label>First Name</Form.Label>
             <FormControl
               value={this.props.firstName}
@@ -34,7 +34,7 @@ class SignUp extends Component {
               type="firstName"
             />
           </FormGroup>
-          <FormGroup controlId="lastName" bsSize="large" className='UserEntry'>
+          <FormGroup controlId="lastName" className="UserEntry">
             <Form.Label>Last Name</Form.Label>
             <FormControl
               value={this.props.lastName}
@@ -49,7 +49,6 @@ class SignUp extends Component {
             className="Button"
             onClick={this.props.handleSubmit}
             block
-            bsSize="large"
             disabled={!this.props.validateForm()}
             type="submit"
           >

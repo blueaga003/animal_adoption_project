@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import NavBar from './components/nav_bar/navBar';
-import LogInContainer from './containers/login/logInContainer';
-import SignUpContainer from './containers/signup/signUpContainer';
-import DisplayResults from './containers/resultsContainer';
+import NavBar from "./components/nav_bar/navBar";
+import LogInContainer from "./containers/login/logInContainer";
+import SignUpContainer from "./containers/signup/signUpContainer";
+import DisplayResults from "./containers/resultsContainer";
+import HomePageContainer from "./containers/homepageContainer";
 
 class App extends Component {
   constructor(props) {
@@ -21,14 +22,14 @@ checkIfLoggedIn = (props) => {
   render() {
     return (
       <Router>
-        <div className='App'>
-          <header className='App-header'>
+        <div className="App">
+          <header className="App-header">
             <NavBar loggedIn={this.state.loggedIn}/>
           </header>
-       <Route exact={true} path='/' component = { SignUpContainer } />
-       <Route path='/petSearch' component = { DisplayResults } />
+       <Route exact={true} path="/" component = { HomePageContainer } />
+       <Route path="/petSearch" component = { DisplayResults } />
        <Route
-         path='/register'
+         path="/register"
          render = {(props) => (
            <SignUpContainer
              {...props}
@@ -37,7 +38,7 @@ checkIfLoggedIn = (props) => {
          )}
       />
        <Route
-         path='/login'
+         path="/login"
          render = {(props) => (
            <LogInContainer
              {...props}

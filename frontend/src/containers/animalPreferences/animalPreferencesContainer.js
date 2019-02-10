@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import AnimalPreferences from "./animalPreferences";
 
 class AnimalPreferencesContainer extends Component {
@@ -7,22 +7,20 @@ class AnimalPreferencesContainer extends Component {
 
     this.state = {
       newUser: {
-        species: '',
+        species: "",
         animalActivityLevels: [],
-        gender: [],
+        gender: []
 
       },
       
-     genderOptions: ['male', 'female'],
-     speciesOptions: ['dog', 'cat', 'horse'],
-     activityLevels: ['not active', 'slightly active', 'moderately active', 'highly active'],
-    //dogBreedOptions: []
+     genderOptions: ["male", "female"],
+     speciesOptions: ["dog", "cat", "horse"],
+     activityLevels: ["not active", "slightly active", "moderately active", "highly active"]
   }
 
 
   this.handleGenderCheckBox = this.handleGenderCheckBox.bind(this);
   this.handleActivityLevelsCheckBox = this.handleActivityLevelsCheckBox.bind(this);
-
   this.handleInput = this.handleInput.bind(this);
 
 }
@@ -31,7 +29,7 @@ handleGenderCheckBox(e) {
     let newSelectionArray;
 
     if(this.state.newUser.gender.indexOf(newSelection) > -1) {
-      newSelectionArray = this.state.newUser.gender.filter(s => s !== newSelection)
+      newSelectionArray = this.state.newUser.gender.filter(s => s !== newSelection);
     } else {
       newSelectionArray = [...this.state.newUser.gender, newSelection];
     }
@@ -40,9 +38,6 @@ handleGenderCheckBox(e) {
         {...prevState.newUser, gender: newSelectionArray }
       })
       )
-
-      console.log("GenderState ")
-      console.log("GenderCheckBox: " + this.state)
       this.props.handleDataBind({gender: newSelectionArray});
 }
 
@@ -51,7 +46,7 @@ handleActivityLevelsCheckBox(e) {
     const newSelection = e.target.value;
     let newSelectionArray;
     if(this.state.newUser.animalActivityLevels.indexOf(newSelection) > -1) {
-      newSelectionArray = this.state.newUser.animalActivityLevels.filter(s => s !== newSelection)
+      newSelectionArray = this.state.newUser.animalActivityLevels.filter(s => s !== newSelection);
     } else {
       newSelectionArray = [...this.state.newUser.animalActivityLevels, newSelection];
     }
@@ -60,26 +55,21 @@ handleActivityLevelsCheckBox(e) {
         {...prevState.newUser, animalActivityLevels: newSelectionArray }
       })
       )
-      console.log("ActivtyLevelState ")
-      console.log("ActivityLevelCheckBox: " + this.state)
-      console.log(this.state)
       this.props.handleDataBind({animalActivityLevels: newSelectionArray});
 }
 
 handleInput(e) {
        let value = e.target.value;
        let name = e.target.name;
-   this.setState( prevState => ({ newUser : 
-        {...prevState.newUser, [name]: value
-        }
-      }), () => console.log("handleInput: " + this.state.newUser));
-
+       this.setState( prevState => ({ newUser : 
+        {...prevState.newUser, [name]: value}
+      }));
       this.props.handleDataBind({species: value});
   }
 
 render() {
     return (
-      <div className='animalPreferences'>
+      <div className="animalPreferences">
         <AnimalPreferences
           newUser={this.state.newUser}
           species={this.state.species}
@@ -95,7 +85,6 @@ render() {
           handleInput={this.handleInput}
         />
       </div>
-
     );
   }
 }

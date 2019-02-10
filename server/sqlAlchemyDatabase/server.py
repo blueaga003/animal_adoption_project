@@ -31,8 +31,7 @@ def register():
             db.session.commit()
             access_token = create_access_token(identity = data['email'])
             refresh_token = create_refresh_token(identity = data['password'])
-            new_user_preferences = PetPreference(user_id=new_user.user_id, species=data['species'],  activity_level=data['animalActivityLevels'], sex=data['gender']) #add age and other columns
-       #     print(new_user_preferences)
+            new_user_preferences = PetPreference(user_id=new_user.user_id, species=data['species'],  activity_level=data['animalActivityLevels'], sex=data['gender'])
             db.session.add(new_user_preferences)
             db.session.commit()
             return jsonify({'user':data['email'], 'access_token': access_token, 'refresh_token': refresh_token})
@@ -54,12 +53,10 @@ def login():
         user_info = {'user':data['email']}
         return jsonify({'user':data['email'], 'access_token': access_token, 'refresh_token': refresh_token})
 
-#put in session as logged in
         print("success login")
         return "hi"
     if request.method == 'GET':
        return "hey"
-#Set session/cookie
 
 @app.route('/petSearch', methods = ['GET', 'POST'])
 @jwt_required

@@ -1,23 +1,20 @@
-import React, { Component } from 'react';
-import { DisplayPet } from '../components/petDisplay'
-import { Row } from 'reactstrap'
-import './petDisplayContainer.css'
+import React, { Component } from "react";
+import { DisplayPet } from "../components/petDisplay"
+import { Row } from "reactstrap"
+import "./petDisplayContainer.css"
 class PetDisplayContainer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      data: [],
+      data: []
   }
-  this.renderList=this.renderList.bind(this)
+  this.renderList=this.renderList.bind(this);
 }
 
-renderList = event => {
+renderList(event) {
 
-  console.log("Response being handled")
   let dataList = []
-  console.log("PETS")
-  console.log(this.props.userResponse.pets)
   for (let object of this.props.userResponse.pets) {
        object = JSON.parse(object)
        dataList.push(
@@ -31,8 +28,6 @@ renderList = event => {
             url={object.url}
           />)
   }
-     console.log("DATALIST")
-     console.log(dataList)
      return dataList
 }
 
