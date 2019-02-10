@@ -15,13 +15,13 @@ class SearchFormContainer extends Component {
         gender: [],
         userResponse: 0,
         defaultSpecies: "",
-        defaultSpeciesOptions: ["dog", "cat", "horse", "unknown"],
+        defaultSpeciesOptions: ["dog", "cat", "horse", "bird", "guinea pig", "snake", "turtle", "gerbil", "snake", "rabbit", "fish", "ferret", "lizard", "hampster", "gekko", "pig", "chinchilla", "duck", "sheep", "rat", "unknown"],
         defaultActivityLevels: ["not active", "slightly active", "moderately active", "highly active", "unknown"],
         defaultGender: ["male", "female", "unknown"],
       },
 
      genderOptions: ["male", "female"],
-     speciesOptions: ["dog", "cat", "horse"],
+     speciesOptions: ["dog", "cat", "horse", "bird", "guinea pig", "snake", "turtle", "gerbil", "snake", "rabbit", "fish", "ferret", "lizard", "hampster", "gekko", "pig", "chinchilla", "duck", "sheep", "rat"],
      activityLevels: ["not active", "slightly active", "moderately active", "highly active"],
     //dogBreedOptions: []
   }
