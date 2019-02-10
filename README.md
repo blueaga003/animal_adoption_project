@@ -27,6 +27,12 @@ Later when they want to come back, they can log in.
 
 Thanks for visiting!
 
+### Future Functionality
+* Voice enabled searches using the Houndify API
+* More search options
+* Local pet-friendly places search with Yelp data integration and Google Maps
+* More test cases
+
 ### Author
 Angie Howard is a Computational Linguist in Santa Clara. 
 You can read more about her [here](https://www.linkedin.com/in/angelarhoward/).
