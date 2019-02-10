@@ -22,6 +22,11 @@ Once they are logged in they can search for pets based on a variety of features.
 ![No Result](images/noResult.png)
 
 Later when they want to come back, they can log in.
+
 ![Log in](images/login.png)
 
 Thanks for visiting!
+
+### Author
+Angie Howard is a Computational Linguist in Santa Clara. 
+You can read more about her [here](https://www.linkedin.com/in/angelarhoward/).
