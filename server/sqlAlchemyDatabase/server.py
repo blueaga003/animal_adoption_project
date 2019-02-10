@@ -39,7 +39,7 @@ def register():
             user_info={'error': 'This email is already in use. Please try another one!'}
             return jsonify(user_info)
 
-@app.route('/login', methods = ['GET', 'POST'])
+@app.route('/login', methods = ['POST'])
 def login():
     """User login."""
     if request.method == 'POST':
@@ -53,18 +53,15 @@ def login():
         user_info = {'user':data['email']}
         return jsonify({'user':data['email'], 'access_token': access_token, 'refresh_token': refresh_token})
 
-        print("success login")
-        return "hi"
-    if request.method == 'GET':
-       return "hey"
-
 @app.route('/petSearch', methods = ['GET', 'POST'])
 @jwt_required
 def petSearch():
     """Pet Search."""
     if request.method == 'POST':
         data = request.get_json()
+        print(data)
         genders = data['gender']
+        ages = data['age']
         front_species = str(data['species'])
         active_levels = data['activityLevels']
         pet_query = db.session.query(Pet)
@@ -74,18 +71,19 @@ def petSearch():
              pet_query = pet_query.filter(Pet.species==front_species)
         if genders != []:
             pet_query = pet_query.filter(Pet.gender.in_(genders))
+        if ages != []:
+            pet_query = pet_query.filter(Pet.age.in_(ages))
         final_pet_query = pet_query.all()
         if final_pet_query != []:
             selections = []
             pet_return_data = {}
             for pet in final_pet_query:
                 selections.append((pet.toString()))
-            return jsonify({"pets" : selections})
+            return jsonify({'pets' : selections})
         else:
             return jsonify({'error':'No results'})
-        return jsonify('hi')
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.debug = True
     DebugToolbarExtension(app)
     connect_to_db(app)

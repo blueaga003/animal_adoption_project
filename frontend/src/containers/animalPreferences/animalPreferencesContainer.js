@@ -14,7 +14,7 @@ class AnimalPreferencesContainer extends Component {
       },
       
      genderOptions: ["male", "female"],
-     speciesOptions: ["dog", "cat", "horse", "bird", "guinea pig", "snake", "turtle", "gerbil", "snake", "rabbit", "fish", "ferret", "lizard", "hampster", "gekko", "pig", "chinchilla", "duck", "sheep", "rat"],
+     speciesOptions: ["dog", "cat", "horse", "bird", "guinea pig", "turtle", "gerbil", "snake", "rabbit", "fish", "ferret", "lizard", "hampster", "gekko", "pig", "chinchilla", "duck", "sheep", "rat"],
      activityLevels: ["not active", "slightly active", "moderately active", "highly active"]
   }
 
@@ -90,6 +90,3 @@ render() {
 }
 
 export default AnimalPreferencesContainer;
-
-
-          //handleInput={this.handleInput}

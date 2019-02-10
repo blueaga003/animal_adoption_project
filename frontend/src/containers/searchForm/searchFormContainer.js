@@ -13,20 +13,23 @@ class SearchFormContainer extends Component {
         species: "",
         animalActivityLevels: [],
         gender: [],
+        age: [],
         userResponse: 0,
         defaultSpecies: "",
-        defaultSpeciesOptions: ["dog", "cat", "horse", "bird", "guinea pig", "snake", "turtle", "gerbil", "snake", "rabbit", "fish", "ferret", "lizard", "hampster", "gekko", "pig", "chinchilla", "duck", "sheep", "rat", "unknown"],
+        defaultSpeciesOptions: ["dog", "cat", "horse", "bird", "guinea pig", "snake", "turtle", "gerbil", "rabbit", "fish", "ferret", "lizard", "hampster", "gekko", "pig", "chinchilla", "duck", "sheep", "rat", "unknown"],
         defaultActivityLevels: ["not active", "slightly active", "moderately active", "highly active", "unknown"],
         defaultGender: ["male", "female", "unknown"],
+        defaultAge: ["baby", "young", "adult", "senior", "unknown"]
       },
 
      genderOptions: ["male", "female"],
-     speciesOptions: ["dog", "cat", "horse", "bird", "guinea pig", "snake", "turtle", "gerbil", "snake", "rabbit", "fish", "ferret", "lizard", "hampster", "gekko", "pig", "chinchilla", "duck", "sheep", "rat"],
+     speciesOptions: ["dog", "cat", "horse", "bird", "guinea pig", "snake", "turtle", "gerbil", "rabbit", "fish", "ferret", "lizard", "hampster", "gekko", "pig", "chinchilla", "duck", "sheep", "rat"],
      activityLevels: ["not active", "slightly active", "moderately active", "highly active"],
-    //dogBreedOptions: []
+     ageOptions: ["baby", "young", "adult", "senior"]
   }
 
   this.handleGenderCheckBox = this.handleGenderCheckBox.bind(this);
+  this.handleAgeCheckBox = this.handleAgeCheckBox.bind(this);
   this.handleActivityLevelsCheckBox = this.handleActivityLevelsCheckBox.bind(this);
   this.handleInput = this.handleInput.bind(this);
   this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -49,6 +52,25 @@ handleGenderCheckBox(e) {
       )
 
       this.props.handleDataBind({gender: newSelectionArray});
+}
+
+handleAgeCheckBox(e) {
+
+    const newSelection = e.target.value;
+    let newSelectionArray;
+
+    if(this.state.newUser.age.indexOf(newSelection) > -1) {
+      newSelectionArray = this.state.newUser.age.filter(s => s !== newSelection)
+    } else {
+      newSelectionArray = [...this.state.newUser.age, newSelection];
+    }
+
+      this.setState( prevState => ({ newUser:
+        {...prevState.newUser, age: newSelectionArray }
+      })
+      )
+
+      this.props.handleDataBind({age: newSelectionArray});
 }
 
 handleActivityLevelsCheckBox(e) {
@@ -79,14 +101,16 @@ handleInput(e) {
 handleFormSubmit(event) {
   let accessToken = localStorage.getItem("Token");
   let backendInfo = {};
-  if ((this.state.newUser.gender.length === 0) && (this.state.newUser.species.length === 0) && (this.state.newUser.animalActivityLevels.length === 0)) {
+  if ((this.state.newUser.gender.length === 0) && (this.state.newUser.species.length === 0) && (this.state.newUser.animalActivityLevels.length === 0) && (this.state.newUser.gender.length === 0)) {
     backendInfo.gender = this.state.newUser.defaultGender;
     backendInfo.species = this.state.newUser.defaultSpecies;
     backendInfo.activityLevels = this.state.newUser.defaultActivityLevels;
+    backendInfo.age = this.state.age.defaultAge;
   } else {
     backendInfo.gender = this.state.newUser.gender;
     backendInfo.species = this.state.newUser.species;
     backendInfo.activityLevels = this.state.newUser.animalActivityLevels;
+    backendInfo.age = this.state.newUser.age;
   }
   event.preventDefault();
   fetch("http://localhost:5000/petSearch", {
@@ -108,13 +132,20 @@ handleFormSubmit(event) {
   render() {
     return (
       <form className="animalSearchWants" onSubmit={this.handleFormSubmit}>
-        <h2 className="searchTitle"> Search Preferances </h2>
+        <h2 className="searchTitle"> Search Preferences </h2>
         <CheckBox title={"GENDER"}
                   name={"gender"}
                   options={this.state.genderOptions}
                   selectedOptions={this.state.newUser.gender}
                   value={this.state.value}
                   handleChange={this.handleGenderCheckBox}
+                  />
+        <CheckBox title={"AGE"}
+                  name={"age"}
+                  options={this.state.ageOptions}
+                  selectedOptions={this.state.newUser.age}
+                  value={this.state.value}
+                  handleChange={this.handleAgeCheckBox}
                   />
         <CheckBox title={"ACTIVITY LEVEL"}
                   name={"animalActivityLevels"}
