@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import Greeting from '../components/greeting/greeting'
 import '../components/petDisplay.css'
 import SearchFormContainer from './searchForm/searchFormContainer';
 import PetDisplayContainer from './petDisplayContainer'
@@ -58,7 +57,6 @@ renderPetDisplayContainer() {
     console.log(this.state.userResponse)
     return (
         <div className='petSearchPage'>
-          <Greeting/>
           <Container style={{maxWidth:'90%'}}>
             <Row>
               <Col md="3">
