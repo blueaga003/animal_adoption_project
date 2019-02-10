@@ -7,35 +7,21 @@ const DisplayPet = (props) => {
                 <div className="petImage" height="300px" width="300px">
                 <img src={props.url} alt="meep"/> 
                 </div>
-            <table>
-              <tbody>
-              <tr>
-                <th>
                 <h4 className="animalName">{props.name}</h4>
-                </th>
-              </tr>
-              <tr>
-                <td>
+                </div>
+                <div>
                   {props.species}
-                </td>
-              </tr>
-              <tr>
-                <td>
+                </div>
+                <div>
                   {props.breed}
-                </td>
-              </tr>
-              <tr>
-                <td>
+                </div>
+                <div>
                   {props.gender}
-                </td>
-              </tr>
-              <tr>
-                <td>
+                </div>
+                <div>
                   {props.age}
-                </td>
-              </tr>
-            </tbody>
-            </table>
+                </div>
+                <div>
             </div>
     </div>
   );
