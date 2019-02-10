@@ -1,0 +1,12 @@
+h3 {
+  font-weight: 600px;
+}
+
+.greeting {
+  text-align: center;
+  font-family: 'Love Ya Like A Sister', cursive;
+  top: 20%;
+  position: relative;
+  vertical-align: middle;
+  font-size: 20px;
+}
