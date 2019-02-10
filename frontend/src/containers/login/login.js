@@ -9,7 +9,7 @@ export default class Login extends Component {
     return (
       <div className="Login">
         <form onSubmit={this.props.handleSubmit}>
-          <FormGroup controlId="email" bssize="large" className='UserEntry'>
+          <FormGroup controlId="email" bssize="large" className="UserEntry">
            <Form.Label>Email</Form.Label>
             <FormControl
               autoFocus
@@ -18,7 +18,7 @@ export default class Login extends Component {
               onChange={this.props.handleChange}
             />
           </FormGroup>
-          <FormGroup controlId="password" bssize="large" className='UserEntry'>
+          <FormGroup controlId="password" bssize="large" className="UserEntry">
            <Form.Label>Password</Form.Label>
             <FormControl
               value={this.props.password}
@@ -37,7 +37,7 @@ export default class Login extends Component {
           </Button>
         </form>
         <div className="UserActivity">
-          {this.props.handleResponse()}
+          {this.props.validateErrorMessage}
         </div>
       </div>
     );
