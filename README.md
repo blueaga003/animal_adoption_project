@@ -25,6 +25,8 @@ Later when they want to come back, they can log in.
 
 ![Log in](images/login.png)
 
+After pulling the repo, you can watch a screencast demo of the app found in images directory!
+
 Thanks for visiting!
 
 ### Future Functionality
